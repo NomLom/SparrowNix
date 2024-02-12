@@ -12,6 +12,8 @@
       ./hardware-configuration.nix
     ];
 
+  services.gnome.gnome-keyring.enable = true;
+
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/vda";
