@@ -93,7 +93,7 @@
           # Import the configuration.nix here, so that the
           # old configuration file can still take effect.
           # Note: configuration.nix itself is also a Nixpkgs Module,
-          $HOME/GitHub/SparrowNix/nixfiles/hosts/slide-desktop/configuration.nix
+          /home/leon/GitHub/SparrowNix/nixfiles/hosts/slide-desktop/configuration.nix
         ];
       };
     };
