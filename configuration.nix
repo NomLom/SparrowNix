@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, helix,... }:
 
 {
   imports =
@@ -102,6 +102,8 @@
       chromium
       github-desktop
       fish
+      discord
+      steam
     #  thunderbird
     ];
   };
@@ -123,6 +125,28 @@
   # Install Helix from the `helix` input
   helix.packages."${pkgs.system}".helix
   ];
+
+  nix.settings = {
+    # given the users in this list the right to specify additional substituters via:
+    #    1. `nixConfig.substituers` in `flake.nix`
+    #    2. command line args `--options substituers http://xxx`
+    trusted-users = ["leon"];
+
+    substituters = [
+      # cache mirror located in China
+      # status: https://mirror.sjtu.edu.cn/
+      # "https://mirror.sjtu.edu.cn/nix-channels/store"
+      # status: https://mirrors.ustc.edu.cn/status/
+      "https://mirrors.ustc.edu.cn/nix-channels/store"
+
+      "https://cache.nixos.org"
+    ];
+
+    trusted-public-keys = [
+      # the default public key of cache.nixos.org, it's built-in, no need to add it here
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    ];
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
