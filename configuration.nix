@@ -102,10 +102,15 @@
       chromium
       github-desktop
       fish
-      discord
       steam
     #  thunderbird
     ];
+  };
+
+  programs.steam = {
+  enable = true;
+  remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
   # Enable automatic login for the user.
