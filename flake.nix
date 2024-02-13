@@ -11,6 +11,8 @@
     # The most widely used is `github:owner/name/reference`,
     # which represents the GitHub repository URL + branch/commit-id/tag.
 
+    # Helix editor, the master branch
+    helix.url = "github:helix-editor/helix/master";
     # Official NixOS package source, using nixos-23.11 branch here
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     # home-manager, used for managing user configuration
@@ -88,7 +90,7 @@
         # `specialArgs`.
         # you must use `specialArgs` by uncommenting the following line:
         #
-        # specialArgs = {...};  # pass custom arguments into all submodules.
+        specialArgs = inputs;  # pass custom arguments into all submodules.
         modules = [
           # Import the configuration.nix here, so that the
           # old configuration file can still take effect.
