@@ -35,10 +35,18 @@ users.users.leon = {
   wget
   git
   curl
+  gvfs
   xfce.thunar
-  xfce.thunar-volman
-  xfce.thunar-archive-plugin
   ];
+
+  programs.thunar.enable = true;
+  programs.xfconf.enable = true;
+  programs.thunar.plugins = with pkgs.xfce; [
+  thunar-archive-plugin
+  thunar-volman
+];
+services.gvfs.enable = true; # Mount, trash, and other functionalities
+services.tumbler.enable = true; # Thumbnail support for images
 
     nix.settings = {
     trusted-users = ["leon"];
