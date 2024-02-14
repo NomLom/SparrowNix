@@ -1,1 +1,2 @@
-sudo nixos-rebuild switch --flake $HOME/GitHub/SparrowNix#slide-desktop
+#!/bin/sh
+sudo nixos-rebuild switch --flake /home/leon/GitHub/SparrowNix#slide-desktop
