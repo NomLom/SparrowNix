@@ -64,3 +64,5 @@ users.users.leon = {
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
+   };
+}
