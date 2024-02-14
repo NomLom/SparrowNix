@@ -128,7 +128,7 @@
   git
   curl
   # Install Helix from the `helix` input
-  helix.packages."${pkgs.system}".helix
+  #helix.packages."${pkgs.system}".helix
   ];
 
   nix.settings = {
