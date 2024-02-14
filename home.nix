@@ -98,7 +98,7 @@
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
-    userName = "NomLom;
+    userName = "NomLom";
     userEmail = "leon.sparrow@gmail.com";
   };
 
