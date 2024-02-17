@@ -61,8 +61,6 @@ services.tumbler.enable = true; # Thumbnail support for images
     ];
   };
 
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
 
     # Enable sound with pipewire.
   sound.enable = true;
