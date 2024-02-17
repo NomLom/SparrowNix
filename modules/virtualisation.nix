@@ -3,7 +3,7 @@
 {
   virtualisation = {
     docker = {
-      enable = true;
+      enable = false;
       storageDriver = "btrfs";
       rootless = {
         enable = true;
@@ -18,6 +18,6 @@
     docker-compose
   ];
 
-  users.users.${user}.extraGroups = [ "libvirtd" "docker" ];
+  users.users.leon.extraGroups = [ "libvirtd" "docker" ];
   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 }

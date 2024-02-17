@@ -32,6 +32,7 @@
    nixpkgs,
    home-manager,
    ... }: {
+   user = "leon";
     nixosConfigurations = {
       slide-desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
