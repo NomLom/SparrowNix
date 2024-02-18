@@ -172,17 +172,18 @@ systemd.user.services.satpaper = {
 
   Service = {
     Environment = [
-      "SATPAPER_SATELLITE=goes-east"
-      "SATPAPER_RESOLUTION_X=2560"
-      "SATPAPER_RESOLUTION_Y=1440"
-      "SATPAPER_DISK_SIZE=94"
+      "SATPAPER_SATELLITE=goes-east",
+      "SATPAPER_RESOLUTION_X=2560",
+      "SATPAPER_RESOLUTION_Y=1440",
+      "SATPAPER_DISK_SIZE=94",
       "SATPAPER_TARGET_PATH=${config.home.homeDirectory}/.local/share/backgrounds/"
     ];
-    ExecStart = "${satpaperBin}/bin/satpaper";
+    ExecStart = "${satpaperBinary}/bin/satpaper";
     Restart = "on-failure";
     RestartSec = 5;
   };
 };
+
 
 
   # This value determines the home Manager release that your
