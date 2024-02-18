@@ -9,6 +9,7 @@
       ../../modules/fonts.nix
       ../../modules/virtualisation.nix
       ../../modules/plasma.nix
+    #  ../../modules/satpaper.nix
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
