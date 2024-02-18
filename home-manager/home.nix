@@ -7,7 +7,7 @@
 
 {
   imports = [
-    ./satpaper.nix
+    ../modules/satpaper.nix
   ];
   home.username = "leon";
   home.homeDirectory = "/home/leon";
@@ -41,7 +41,7 @@
   home.packages = with pkgs; [
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
-satpaperBinary
+
     neofetch
     nnn # terminal file manager
 
