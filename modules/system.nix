@@ -37,6 +37,7 @@ users.users.leon = {
   curl
   gvfs
   xfce.thunar
+  kde-gtk-config
   ];
 
   programs.thunar.enable = true;

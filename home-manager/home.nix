@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  # TODO please change the username & home direcotry to your own
+
   home.username = "leon";
   home.homeDirectory = "/home/leon";
 
@@ -25,6 +25,10 @@
     "Xcursor.size" = 16;
     "Xft.dpi" = 120;
   };
+
+
+
+
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
