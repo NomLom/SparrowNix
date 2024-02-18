@@ -25,7 +25,7 @@ in
 
 
 {
-
+home.packages = with pkgs; [ satpaperBin ];
   home.username = "leon";
   home.homeDirectory = "/home/leon";
 
