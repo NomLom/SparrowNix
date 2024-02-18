@@ -1,31 +1,23 @@
 { config, pkgs, ... }:
 
 let
-  # Ensure you're using the correct attribute from your Nix packages
-  # This assumes `pkgs.rustPackages.buildRustPackage` is the correct path
-  satpaperBin = pkgs.rustPackages.buildRustPackage rec {
-    pname = "satpaper";
-    version = "0.1.0"; # Use the actual version or "unstable-yyyy-mm-dd" format for a commit
-
-    src = pkgs.fetchFromGitHub {
-      owner = "Colonial-Dev";
-      repo = pname;
-      rev = "master"; # Prefer pinning to a specific commit for reproducibility
-      # Use the correct sha256 for the source code
-      sha256 = "6YHCjR2j027j20pZWq+OXbjjIX8M5EDo0mbVgbvMONs="; # Placeholder, replace with the actual value
+  satpaperBinary = pkgs.stdenv.mkDerivation {
+    name = "satpaper";
+    src = pkgs.fetchurl {
+      url = "https://github.com/Colonial-Dev/satpaper/releases/download/v0.1.0/satpaper-x86_64-unknown-linux-musl";
+      sha256 = "00000"; # You need to replace this with the actual SHA-256 hash of the binary
     };
-
-    # Use the correct cargoSha256 for Cargo dependencies
-    cargoSha256 = "0000000000000000000000000000000000000000000000000000"; # Placeholder, replace after the first build attempt
+    phases = [ "unpackPhase" "installPhase" ];
+    installPhase = ''
+      install -D $src $out/bin/satpaper
+    '';
   };
-
-
 
 in
 
 
 {
-home.packages = with pkgs; [ satpaperBin ];
+
   home.username = "leon";
   home.homeDirectory = "/home/leon";
 
@@ -58,7 +50,7 @@ home.packages = with pkgs; [ satpaperBin ];
   home.packages = with pkgs; [
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
-
+satpaperBinary
     neofetch
     nnn # terminal file manager
 
