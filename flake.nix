@@ -24,7 +24,7 @@
       url = "github:catppuccin/bat";
       flake = false;
     };
-
+  #satpaper.url = https://github.com/Colonial-Dev/satpaper;
   };
 
    outputs = inputs@{
