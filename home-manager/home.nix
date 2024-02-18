@@ -1,16 +1,26 @@
 { config, pkgs, ... }:
 
 let
-  satpaperBinary = pkgs.stdenv.mkDerivation {
-    name = "satpaper";
+  satpaperBinary = pkgs.stdenv.mkDerivation rec {
+    pname = "satpaper";
+    version = "0.6.0";
     src = pkgs.fetchurl {
-      url = "https://github.com/Colonial-Dev/satpaper/releases/download/v0.1.0/satpaper-x86_64-unknown-linux-musl";
-      sha256 = "00000"; # You need to replace this with the actual SHA-256 hash of the binary
+      url = "https://github.com/Colonial-Dev/satpaper/releases/download/${version}/satpaper-x86_64-unknown-linux-musl";
+      sha256 = "Z4Dc2/g7AcvLMme7dnnQgXPIrR9AImHXhqwWr2NHSNg="; # Updated SHA-256 hash
     };
-    phases = [ "unpackPhase" "installPhase" ];
+
+    dontUnpack = true; # Do not attempt to unpack
+    dontBuild = true;  # No build phase
+
     installPhase = ''
-      install -D $src $out/bin/satpaper
+      install -Dm755 $src $out/bin/satpaper
     '';
+
+    meta = {
+      description = "Satpaper - dynamic wallpapers for your desktop";
+      homepage = "https://github.com/Colonial-Dev/satpaper";
+      license = pkgs.lib.licenses.mit;
+    };
   };
 
 in
@@ -172,10 +182,10 @@ systemd.user.services.satpaper = {
 
   Service = {
     Environment = [
-      "SATPAPER_SATELLITE=goes-east",
-      "SATPAPER_RESOLUTION_X=2560",
-      "SATPAPER_RESOLUTION_Y=1440",
-      "SATPAPER_DISK_SIZE=94",
+      "SATPAPER_SATELLITE=meteosat10"
+      "SATPAPER_RESOLUTION_X=2560"
+      "SATPAPER_RESOLUTION_Y=1440"
+      "SATPAPER_DISK_SIZE=94"
       "SATPAPER_TARGET_PATH=${config.home.homeDirectory}/.local/share/backgrounds/"
     ];
     ExecStart = "${satpaperBinary}/bin/satpaper";
