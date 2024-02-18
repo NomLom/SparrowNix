@@ -1,21 +1,26 @@
 { config, pkgs, ... }:
 
 let
-  satpaperBin = pkgs.stdenv.mkDerivation {
-    name = "satpaper";
-    buildInputs = [ pkgs.cargo pkgs.rustc pkgs.git ];
+  # Ensure you're using the correct attribute from your Nix packages
+  # This assumes `pkgs.rustPackages.buildRustPackage` is the correct path
+  satpaperBin = pkgs.rustPackages.buildRustPackage rec {
+    pname = "satpaper";
+    version = "0.1.0"; # Use the actual version or "unstable-yyyy-mm-dd" format for a commit
+
     src = pkgs.fetchFromGitHub {
       owner = "Colonial-Dev";
-      repo = "satpaper";
-      rev = "master"; # Consider pinning to a specific commit for stability
-      sha256 = "0000000000000000000000000000000000000000000000000000"; # Update with the correct sha256
+      repo = pname;
+      rev = "master"; # Prefer pinning to a specific commit for reproducibility
+      # Use the correct sha256 for the source code
+      sha256 = "6YHCjR2j027j20pZWq+OXbjjIX8M5EDo0mbVgbvMONs="; # Placeholder, replace with the actual value
     };
-    buildPhase = "cargo build --release";
-    installPhase = ''
-      mkdir -p $out/bin
-      cp target/release/satpaper $out/bin/
-    '';
+
+    # Use the correct cargoSha256 for Cargo dependencies
+    cargoSha256 = "0000000000000000000000000000000000000000000000000000"; # Placeholder, replace after the first build attempt
   };
+
+
+
 in
 
 
