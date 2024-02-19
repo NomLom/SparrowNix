@@ -1,68 +1,52 @@
 { config, lib, pkgs, options, ... }:
 
-let
-  hl = config.homelab;
-  cfg = hl.multimedia;
-in
+
+
+
 {
-  options.homelab.multimedia = with lib; {
-    enable = mkEnableOption "multimedia";
-    deluge = {
-      interface = mkOption {
-        type = types.nullOr types.str;
-        default = null;
-      };
-    };
+
+  services.radarr = {
+    enable = true;
+    dataDir = "/var/lib/radarr";
+    user = "radarr";
+    group = "radarr";
   };
 
-  config = lib.mkIf cfg.enable {
-    users.groups.multimedia = { };
-    users.users."${config.mySystem.user}".extraGroups = [ "multimedia" ];
-
-    systemd.tmpfiles.rules = [
-      "d /data/media 0770 - multimedia - -"
-    ];
-
-    homelab.traefik = {
-      enable = true;
-      services = {
-        jellyfin.port = 8096;
-        sonarr.port = 8989;
-        radarr.port = 7878;
-        prowlarr.port = 9696;
-        bazarr.port = config.services.bazarr.listenPort;
-        deluge.port = config.services.deluge.web.port;
-      };
-
-    };
-
-    services = {
-      jellyfin = {
-        enable = true;
-        group = "multimedia";
-      };
-      sonarr = { enable = true; group = "multimedia"; };
-      radarr = { enable = true; group = "multimedia"; };
-      bazarr = { enable = true; group = "multimedia"; };
-      prowlarr = { enable = true; };
-      deluge = {
-        enable = true;
-        group = "multimedia";
-        web.enable = true;
-        dataDir = "/data/media/torrent";
-        declarative = true;
-        config = {
-          enabled_plugins = [ "Label" ];
-        } // (lib.optionalAttrs (cfg.deluge.interface != null) {
-          outgoing_interface = cfg.deluge.interface;
-        });
-        authFile = pkgs.writeTextFile {
-          name = "deluge-auth";
-          text = ''
-            localclient::10
-          '';
-        };
-      };
-    };
+  services.sonarr = {
+    enable = true;
+    dataDir = "/var/lib/sonarr";
+    user = "sonarr";
+    group = "sonarr";
   };
+
+
+  services.jellyfin = {
+    enable = true;
+    dataDir = "/var/lib/jellyfin";
+    user = "jellyfin";
+    group = "jellyfin";
+  };
+
+  networking.firewall.allowedTCPPorts = [ 8096 8920 7878 8989 ]; # Add these to your
+
+  # Optional: Configure users and groups for Radarr and Sonarr
+  users.users.radarr = {
+    isSystemUser = true;
+    home = "/var/lib/radarr";
+    createHome = true;
+  };
+
+  users.users.sonarr = {
+    isSystemUser = true;
+    home = "/var/lib/sonarr";
+    createHome = true;
+  };
+
+    users.users.jellyfin = {
+    isSystemUser = true;
+    home = "/var/lib/jellyfin";
+    createHome = true;
+  };
+
+
 }
