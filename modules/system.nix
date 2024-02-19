@@ -17,6 +17,9 @@ users.users.leon = {
       github-desktop
       fish
       steam
+      radarr
+      sonarr
+      sabnzbd
     #  thunderbird
     ];
   };
