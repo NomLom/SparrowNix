@@ -9,7 +9,7 @@
       ../../modules/fonts.nix
       ../../modules/virtualisation.nix
       ../../modules/plasma.nix
-
+      ../../modules/nixos/services/default.nix
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
