@@ -9,7 +9,7 @@
       ../../modules/fonts.nix
       ../../modules/virtualisation.nix
       ../../modules/plasma.nix
-    #  ../../modules/satpaper.nix
+
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
@@ -49,7 +49,7 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-
+  nix.settings.auto-optimise-store = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
