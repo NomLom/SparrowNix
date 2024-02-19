@@ -1,56 +1,28 @@
 # Usenet binary client.
 { config, lib, ... }:
-let
-  cfg = config.my.services.sabnzbd;
-  port = 9090; # NOTE: not declaratively set...
-in
+
 {
-  options.my.services.sabnzbd = with lib; {
-    enable = mkEnableOption "SABnzbd binary news reader";
+   # Enable the SABnzbd service
+  services.sabnzbd = {
+    enable = true;
+    # Specify the user and group under which SABnzbd will run
+    user = "sabnzbd";
+    group = "sabnzbd";
+    # For custom configurations, you can specify the configuration file path
+    # configFile = "/path/to/your/sabnzbd.ini";
   };
 
-  config = lib.mkIf cfg.enable {
-    services.sabnzbd = {
-      enable = true;
-      group = "media";
-    };
-
-    # Set-up media group
-    users.groups.media = { };
-
- #   my.services.nginx.virtualHosts = {
-  #    sabnzbd = {
-  #      inherit port;
-  #    };
-  #  };
-
-    services.fail2ban.jails = {
-      sabnzbd = ''
-        enabled = true
-        filter = sabnzbd
-        port = http,https
-        # Unfortunately, sabnzbd does not log to systemd journal
-        backend = auto
-        logpath = /var/lib/sabnzbd/logs/sabnzbd.log
-      '';
-    };
-
-    environment.etc = {
-      # FIXME: path to log file
-      "fail2ban/filter.d/sabnzbd.conf".text = ''
-        [Definition]
-        failregex = ^.*WARNING.*API Key incorrect, Use the api key from Config->General in your 3rd party program: .* \(X-Forwarded-For: <HOST>\) .*$
-                    ^.*WARNING.*API Key incorrect, Use the api key from Config->General in your 3rd party program: <HOST> .*$
-                    ^.*WARNING.*API Key missing, please enter the api key from Config->General into your 3rd party program: .* \(X-Forwarded-For: <HOST>\) .*$
-                    ^.*WARNING.*API Key missing, please enter the api key from Config->General into your 3rd party program: <HOST> .*$
-                    ^.*WARNING.*Refused connection from: .* \(X-Forwarded-For: <HOST>\) .*$
-                    ^.*WARNING.*Refused connection from: <HOST> .*$
-                    ^.*WARNING.*Refused connection with hostname ".*" from: .* \(X-Forwarded-For: <HOST>\) .*$
-                    ^.*WARNING.*Refused connection with hostname ".*" from: <HOST> .*$
-                    ^.*WARNING.*Unsuccessful login attempt from .* \(X-Forwarded-For: <HOST>\) .*$
-                    ^.*WARNING.*Unsuccessful login attempt from <HOST> .*$
-        journalmatch = _SYSTEMD_UNIT=sabnzbd.service
-      '';
-    };
+  # Configure the user for SABnzbd (if not already existing)
+  users.users.sabnzbd = {
+    isSystemUser = true;
+    group = "sabnzbd";
+    home = lib.mkForce "/var/lib/sabnzbd"; # Force the use of this home directory
+    createHome = true;
   };
+
+  # Ensure the SABnzbd group exists
+  users.groups.sabnzbd = {};
+
+  # Open firewall ports if necessary
+  networking.firewall.allowedTCPPorts = [ 8080 ]; # Default SABnzbd web interface port
 }

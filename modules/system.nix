@@ -17,6 +17,7 @@ users.users.leon = {
       github-desktop
       fish
       steam
+      gparted
     #  thunderbird
     ];
   };

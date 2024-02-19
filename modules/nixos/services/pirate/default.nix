@@ -22,7 +22,7 @@
 
   services.jellyfin = {
     enable = true;
-    dataDir = "/var/lib/jellyfin";
+
     user = "jellyfin";
     group = "jellyfin";
   };

@@ -4,5 +4,6 @@
   imports = [
     ./pirate
     ./sabnzbd
+    ./onedrive
   ];
 }
