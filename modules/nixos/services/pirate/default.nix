@@ -20,7 +20,7 @@ in
     users.users."${config.mySystem.user}".extraGroups = [ "multimedia" ];
 
     systemd.tmpfiles.rules = [
-      "d ${config.homelab.storage}/media 0770 - multimedia - -"
+      "d /data/media 0770 - multimedia - -"
     ];
 
     homelab.traefik = {
@@ -49,7 +49,7 @@ in
         enable = true;
         group = "multimedia";
         web.enable = true;
-        dataDir = "${config.homelab.storage}/media/torrent";
+        dataDir = "/data/media/torrent";
         declarative = true;
         config = {
           enabled_plugins = [ "Label" ];
