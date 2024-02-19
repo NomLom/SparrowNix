@@ -1,92 +1,68 @@
-# The total autonomous media delivery system.
-# Relevant link [1].
-#
-# [1]: https://youtu.be/I26Ql-uX6AM
-{ config, lib, ... }:
+{ config, lib, pkgs, options, ... }:
+
 let
-  cfg = config.my.services.pirate;
-
-  ports = {
-    bazarr = 6767;
-    lidarr = 8686;
-    radarr = 7878;
-    sonarr = 8989;
-  };
-
-  mkService = service: {
-    services.${service} = {
-      enable = true;
-      group = "media";
-    };
-  };
-
-  mkRedirection = service: {
-    my.services.nginx.virtualHosts = {
-      ${service} = {
-        port = ports.${service};
+  hl = config.homelab;
+  cfg = hl.multimedia;
+in
+{
+  options.homelab.multimedia = with lib; {
+    enable = mkEnableOption "multimedia";
+    deluge = {
+      interface = mkOption {
+        type = types.nullOr types.str;
+        default = null;
       };
     };
   };
 
-  mkFail2Ban = service: lib.mkIf cfg.${service}.enable {
-    services.fail2ban.jails = {
-      ${service} = ''
-        enabled = true
-        filter = ${service}
-        action = iptables-allports
-      '';
+  config = lib.mkIf cfg.enable {
+    users.groups.multimedia = { };
+    users.users."${config.mySystem.user}".extraGroups = [ "multimedia" ];
+
+    systemd.tmpfiles.rules = [
+      "d ${config.homelab.storage}/media 0770 - multimedia - -"
+    ];
+
+    homelab.traefik = {
+      enable = true;
+      services = {
+        jellyfin.port = 8096;
+        sonarr.port = 8989;
+        radarr.port = 7878;
+        prowlarr.port = 9696;
+        bazarr.port = config.services.bazarr.listenPort;
+        deluge.port = config.services.deluge.web.port;
+      };
+
     };
 
-    environment.etc = {
-      "fail2ban/filter.d/${service}.conf".text = ''
-        [Definition]
-        failregex = ^.*\|Warn\|Auth\|Auth-Failure ip <HOST> username .*$
-        journalmatch = _SYSTEMD_UNIT=${service}.service
-      '';
+    services = {
+      jellyfin = {
+        enable = true;
+        group = "multimedia";
+      };
+      sonarr = { enable = true; group = "multimedia"; };
+      radarr = { enable = true; group = "multimedia"; };
+      bazarr = { enable = true; group = "multimedia"; };
+      prowlarr = { enable = true; };
+      deluge = {
+        enable = true;
+        group = "multimedia";
+        web.enable = true;
+        dataDir = "${config.homelab.storage}/media/torrent";
+        declarative = true;
+        config = {
+          enabled_plugins = [ "Label" ];
+        } // (lib.optionalAttrs (cfg.deluge.interface != null) {
+          outgoing_interface = cfg.deluge.interface;
+        });
+        authFile = pkgs.writeTextFile {
+          name = "deluge-auth";
+          text = ''
+            localclient::10
+          '';
+        };
+      };
     };
   };
-
-  mkFullConfig = service: lib.mkIf cfg.${service}.enable (lib.mkMerge [
-    (mkService service)
-    (mkRedirection service)
-  ]);
-in
-{
-  options.my.services.pirate = {
-    enable = lib.mkEnableOption "Media automation";
-
-    bazarr = {
-      enable = lib.my.mkDisableOption "Bazarr";
-    };
-
-    lidarr = {
-      enable = lib.my.mkDisableOption "Lidarr";
-    };
-
-    radarr = {
-      enable = lib.my.mkDisableOption "Radarr";
-    };
-
-    sonarr = {
-      enable = lib.my.mkDisableOption "Sonarr";
-    };
-  };
-
-  config = lib.mkIf cfg.enable (lib.mkMerge [
-    {
-      # Set-up media group
-      users.groups.media = { };
-    }
-    # Bazarr does not log authentication failures...
-    (mkFullConfig "bazarr")
-    # Lidarr for music
-    (mkFullConfig "lidarr")
-    (mkFail2Ban "lidarr")
-    # Radarr for movies
-    (mkFullConfig "radarr")
-    (mkFail2Ban "radarr")
-    # Sonarr for shows
-    (mkFullConfig "sonarr")
-    (mkFail2Ban "sonarr")
-  ]);
 }
