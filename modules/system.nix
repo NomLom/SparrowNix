@@ -33,7 +33,12 @@ in {
     gvfs
     xfce.thunar
     kde-gtk-config
-
+  gst_all_1.gst-plugins-base
+  gst_all_1.gst-plugins-good
+  gst_all_1.gst-plugins-ugly
+  gst_all_1.gst-plugins-bad
+  gst_all_1.gst-libav
+    ffmpeg
     # Additional packages previously defined are merged here
   ];
 
@@ -77,5 +82,12 @@ in {
     alsa.support32Bit = true;
     pulse.enable = true;
     #jack.enable = true; # If you want to use JACK applications, uncomment this
+
+    };
+
+    nix.gc = {
+    automatic = true; # Enable automatic garbage collection
+    dates = "weekly"; # Set the garbage collection frequency to weekly
+    options = "--delete-older-than 14d"; # Remove generations older than 30 days
   };
 }
