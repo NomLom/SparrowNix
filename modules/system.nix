@@ -17,7 +17,7 @@ in {
       fish
       steam
       gparted
-      smartmontools
+
       # thunderbird
     ];
   };
@@ -33,7 +33,7 @@ in {
     gvfs
     xfce.thunar
     kde-gtk-config
-    smartmontools
+
     # Additional packages previously defined are merged here
   ];
 

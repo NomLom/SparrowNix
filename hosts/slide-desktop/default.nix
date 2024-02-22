@@ -8,6 +8,7 @@
       ../../modules/system.nix
       ../../modules/fonts.nix
       ../../modules/virtualisation.nix
+      ../../modules/smartmon.nix
       ../../modules/plasma.nix
       ../../modules/nixos/services/default.nix
       # Include the results of the hardware scan.
