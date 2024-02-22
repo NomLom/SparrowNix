@@ -4,6 +4,15 @@
 
 
 {
+
+ system.activationScripts.setPermissions = {
+    text = ''
+      chown -R :multimedia /mnt/SSD/arr/ /mnt/media/media/
+      chmod -R 775 /mnt/SSD/arr/ /mnt/media/media/
+    '';
+    deps = [ ];
+    };
+
 users.groups.multimedia = { };
   services.radarr = {
     enable = true;
@@ -30,9 +39,8 @@ users.groups.multimedia = { };
 
   };
 
-  networking.firewall.allowedTCPPorts = [ 8096 8920 7878 8989 ]; # Add these to your
-
-  # Optional: Configure users and groups for Radarr and Sonarr
+  networking.firewall.allowedTCPPorts = [ 8096 8920 7878 8989 ];
+  # Configure config directorys
   users.users.radarr = {
     isSystemUser = true;
     home = "/var/lib/radarr";

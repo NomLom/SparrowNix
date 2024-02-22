@@ -7,8 +7,8 @@
     enable = true;
     # Specify the user and group under which SABnzbd will run
     user = "sabnzbd";
-    group = "sabnzbd";
-    extraGroups = [ "media" ];
+    group = "multimedia";
+
     # For custom configurations, you can specify the configuration file path
     # configFile = "/path/to/your/sabnzbd.ini";
   };

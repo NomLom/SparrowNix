@@ -17,7 +17,8 @@ in {
       fish
       steam
       gparted
-
+      mplayer
+      kmplayer
       # thunderbird
     ];
   };
