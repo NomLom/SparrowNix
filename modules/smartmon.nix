@@ -1,4 +1,4 @@
- { config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib;
 
@@ -8,25 +8,22 @@ let
 
   smartdNotify = pkgs.writeScript "smartd-notify.sh" ''
     #! ${pkgs.runtimeShell}
-    ${optionalString cfg.notifications.wall.enable ''
+    ${cfg.notifications.enable && cfg.notifications.wall.enable ''
       echo "Problem detected with disk: $SMARTD_DEVICESTRING
       Warning message from smartd is:
       $SMARTD_MESSAGE" | ${pkgs.util-linux}/bin/wall
     ''}
-    ${optionalString cfg.notifications.x11.enable ''
-      export DISPLAY=${cfg.notifications.x11.display}
-      echo "Problem detected with disk: $SMARTD_DEVICESTRING
+    ${cfg.notifications.enable && cfg.notifications.x11.enable ''
+      ${pkgs.libnotify}/bin/notify-send "SMARTD Alert" "Problem detected with disk: $SMARTD_DEVICESTRING
       Warning message from smartd is:
-      $SMARTD_FULLMESSAGE" | ${pkgs.xorg.xmessage}/bin/xmessage -file -
+      $SMARTD_FULLMESSAGE"
     ''}
   '';
-
 in {
+  options.services.smartd.notifications = {
+    enable = mkEnableOption "Enable custom smartd notifications";
 
-  options.services.smartd = {
-    enable = mkEnableOption "smartd daemon from `smartmontools` package";
-
-    notifications.wall = {
+    wall = {
       enable = mkOption {
         default = true;
         type = types.bool;
@@ -34,30 +31,22 @@ in {
       };
     };
 
-    notifications.x11 = {
+    x11 = {
       enable = mkOption {
-        default = config.services.xserver.enable;
-        defaultText = "config.services.xserver.enable";
+        default = true;
         type = types.bool;
-        description = "Whether to send X11 xmessage notifications.";
+        description = "Whether to send desktop notifications.";
       };
 
       display = mkOption {
         default = ":0";
         type = types.str;
-        description = "DISPLAY to send X11 notifications to.";
+        description = "DISPLAY for X11 notifications, not used for Wayland.";
       };
     };
   };
 
   config = mkIf cfg.enable {
-    systemd.services.smartd = {
-      description = "S.M.A.R.T. Daemon";
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        ExecStart = "${pkgs.smartmontools}/sbin/smartd --no-fork -M exec ${smartdNotify}";
-      };
-    };
+    systemd.services.smartd.serviceConfig.ExecStart = lib.mkForce "${pkgs.smartmontools}/sbin/smartd --no-fork -M exec ${smartdNotify}";
   };
-
 }
