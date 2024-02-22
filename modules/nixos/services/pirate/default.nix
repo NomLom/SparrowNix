@@ -4,19 +4,21 @@
 
 
 {
-
+users.groups.multimedia = { };
   services.radarr = {
     enable = true;
     dataDir = "/var/lib/radarr";
     user = "radarr";
-    group = "radarr";
+    group = "multimedia";
+
   };
 
   services.sonarr = {
     enable = true;
     dataDir = "/var/lib/sonarr";
     user = "sonarr";
-    group = "sonarr";
+    group = "multimedia";
+
   };
 
 
@@ -24,7 +26,8 @@
     enable = true;
 
     user = "jellyfin";
-    group = "jellyfin";
+    group = "multimedia";
+
   };
 
   networking.firewall.allowedTCPPorts = [ 8096 8920 7878 8989 ]; # Add these to your

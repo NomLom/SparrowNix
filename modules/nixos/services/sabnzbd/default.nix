@@ -8,6 +8,7 @@
     # Specify the user and group under which SABnzbd will run
     user = "sabnzbd";
     group = "sabnzbd";
+    extraGroups = [ "media" ];
     # For custom configurations, you can specify the configuration file path
     # configFile = "/path/to/your/sabnzbd.ini";
   };
