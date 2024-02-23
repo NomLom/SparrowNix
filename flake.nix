@@ -35,12 +35,24 @@
    nixpkgs-unstable,
    flake-utils,
    ... }: {
-   user = "leon";
+   #user = "leon";
     nixosConfigurations = {
       slide-desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
         modules = [
+
+                     ({ ... }: {
+        nixpkgs.overlays = [
+          (final: prev: {
+            # Correctly reference Sonarr from nixpkgs-unstable
+            sonarr = nixpkgs-unstable.legacyPackages.x86_64-linux.sonarr;
+          })
+        ];
+      })
+
+
+
           ./hosts/slide-desktop
 
 
