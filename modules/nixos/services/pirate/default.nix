@@ -22,7 +22,9 @@ users.groups.multimedia = { };
 
   };
 
-  services.sonarr = {
+  services.sonarr =
+
+  {
     enable = true;
     dataDir = "/var/lib/sonarr";
     user = "sonarr";
