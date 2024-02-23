@@ -42,14 +42,14 @@
 
         modules = [
 
-                     ({ ... }: {
+        ({ ... }: {
         nixpkgs.overlays = [
-          (final: prev: {
-            # Correctly reference Sonarr from nixpkgs-unstable
+        (final: prev: {
+            # Add your unstable overlays :-)
             sonarr = nixpkgs-unstable.legacyPackages.x86_64-linux.sonarr;
-          })
+        })
         ];
-      })
+        })
 
 
 
