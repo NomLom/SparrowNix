@@ -15,7 +15,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-    nixpkgs-unstable.url = "nixpkgs/unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
@@ -43,11 +43,8 @@
         modules = [
           ./hosts/slide-desktop
 
- ({ pkgs, ... }: {
-          nixpkgs.overlays = [
-            (import ./overlays { inherit pkgs; })
-          ];
-        })
+
+
 
           # make home-manager as a module of nixos
           # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
