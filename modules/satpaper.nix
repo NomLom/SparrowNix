@@ -43,5 +43,5 @@ in
 };
 
   # Optionally, add the satpaper binary to the user's environment
-  home.packages = [ satpaperBinary ];
+  #home.packages = [ satpaperBinary ];
 }

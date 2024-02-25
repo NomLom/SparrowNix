@@ -10,6 +10,7 @@
       ../../modules/virtualisation.nix
       ../../modules/smartmon.nix
       ../../modules/plasma.nix
+     # ../../modules/satpaper.nix
       ../../modules/nixos/services/default.nix
       # Include the results of the hardware scan.
       ./hardware-configuration.nix

@@ -7,6 +7,11 @@
 
 {
 
+imports = [
+
+../modules/satpaper.nix
+];
+
   home.username = "leon";
   home.homeDirectory = "/home/leon";
 
