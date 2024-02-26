@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   satpaperBinary = pkgs.stdenv.mkDerivation rec {
     pname = "satpaper";
     version = "0.6.0";
@@ -22,25 +25,24 @@ let
       license = pkgs.lib.licenses.mit;
     };
   };
-in
-{
+in {
   systemd.user.services.satpaper = {
-  Unit.Description = "Satpaper Dynamic Wallpaper Service";
-  Install.WantedBy = [ "default.target" ];
+    Unit.Description = "Satpaper Dynamic Wallpaper Service";
+    Install.WantedBy = ["default.target"];
 
-  Service = {
-    Environment = [
-      "SATPAPER_SATELLITE=meteosat10"
-      "SATPAPER_RESOLUTION_X=3840"
-      "SATPAPER_RESOLUTION_Y=1600"
-      "SATPAPER_DISK_SIZE=96"
-      "SATPAPER_TARGET_PATH=${config.home.homeDirectory}/.local/share/backgrounds/"
-    ];
-    ExecStart = "${satpaperBinary}/bin/satpaper";
-    Restart = "on-failure";
-    RestartSec = 5;
+    Service = {
+      Environment = [
+        "SATPAPER_SATELLITE=meteosat10"
+        "SATPAPER_RESOLUTION_X=3840"
+        "SATPAPER_RESOLUTION_Y=1600"
+        "SATPAPER_DISK_SIZE=96"
+        "SATPAPER_TARGET_PATH=${config.home.homeDirectory}/.local/share/backgrounds/"
+      ];
+      ExecStart = "${satpaperBinary}/bin/satpaper";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
   };
-};
 
   # Optionally, add the satpaper binary to the user's environment
   #home.packages = [ satpaperBinary ];

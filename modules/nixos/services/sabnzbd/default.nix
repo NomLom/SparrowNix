@@ -1,8 +1,10 @@
 # Usenet binary client.
-{ config, lib, ... }:
-
 {
-   # Enable the SABnzbd service
+  config,
+  lib,
+  ...
+}: {
+  # Enable the SABnzbd service
   services.sabnzbd = {
     enable = true;
     # Specify the user and group under which SABnzbd will run
@@ -25,5 +27,5 @@
   users.groups.sabnzbd = {};
 
   # Open firewall ports if necessary
-  networking.firewall.allowedTCPPorts = [ 8080 ]; # Default SABnzbd web interface port
+  networking.firewall.allowedTCPPorts = [8080]; # Default SABnzbd web interface port
 }

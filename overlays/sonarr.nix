@@ -1,12 +1,14 @@
- { config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   # Fetch the unstable nixpkgs
   unstablePkgs = import <nixpkgs-unstable> {
     config = config.nixpkgs.config;
   };
-in
-{
+in {
   # Override the Sonarr package
   nixpkgs.overlays = [
     (self: super: {

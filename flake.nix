@@ -12,7 +12,6 @@
     ];
   };
 
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -21,6 +20,9 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-gaming.url = "github:fufexan/nix-gaming";
+    alejandra.url = "github:kamadorueda/alejandra/3.0.0";
+    alejandra.inputs.nixpkgs.follows = "nixpkgs";
     catppuccin-bat = {
       url = "github:catppuccin/bat";
       flake = false;
@@ -28,51 +30,44 @@
     # Additional inputs...
   };
 
-   outputs = inputs@{
-   self,
-   nixpkgs,
-   home-manager,
-   nixpkgs-unstable,
-   flake-utils,
-   ... }: {
-   #user = "leon";
+
+  outputs = {self, nixpkgs, ...}@inputs: {
+
+
+    #user = "leon";
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
     nixosConfigurations = {
-      slide-desktop = nixpkgs.lib.nixosSystem {
+      slide-desktop = nixpkgs.lib.nixosSystem rec {
+      specialArgs = {inherit inputs;};
         system = "x86_64-linux";
 
         modules = [
-
-        ({ ... }: {
-        nixpkgs.overlays = [
-        (final: prev: {
-            # Add your unstable overlays :-)
-            sonarr = nixpkgs-unstable.legacyPackages.x86_64-linux.sonarr;
-        })
-        ];
-        })
-
-
+          ({...}: {
+            nixpkgs.overlays = [
+              (final: prev: {
+                # Add your unstable overlays :-)
+                sonarr = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.sonarr;
+              })
+            ];
+          })
 
           ./hosts/slide-desktop
 
-
-
-
           # make home-manager as a module of nixos
           # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-          home-manager.nixosModules.home-manager
+          inputs.home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.extraSpecialArgs = inputs;
+            home-manager.extraSpecialArgs = {inherit inputs;};
             home-manager.users.leon = import ./home-manager/home.nix;
 
             # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
           }
         ];
+
       };
     };
   };
 }
-

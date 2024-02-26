@@ -8,7 +8,7 @@ in {
   users.users.leon = {
     isNormalUser = true;
     description = "leon";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       firefox
       kate
@@ -34,11 +34,11 @@ in {
     gvfs
     xfce.thunar
     kde-gtk-config
-  gst_all_1.gst-plugins-base
-  gst_all_1.gst-plugins-good
-  gst_all_1.gst-plugins-ugly
-  gst_all_1.gst-plugins-bad
-  gst_all_1.gst-libav
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-libav
     ffmpeg
     # Additional packages previously defined are merged here
   ];
@@ -67,9 +67,11 @@ in {
     substituters = [
       "https://mirrors.ustc.edu.cn/nix-channels/store"
       "https://cache.nixos.org"
+      "https://nix-gaming.cachix.org"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
     ];
   };
 
@@ -83,10 +85,19 @@ in {
     alsa.support32Bit = true;
     pulse.enable = true;
     #jack.enable = true; # If you want to use JACK applications, uncomment this
-
+    lowLatency = {
+      # enable this module
+      enable = true;
+      # defaults (no need to be set unless modified)
+      quantum = 64;
+      rate = 48000;
     };
+  };
 
-    nix.gc = {
+
+
+
+  nix.gc = {
     automatic = true; # Enable automatic garbage collection
     dates = "weekly"; # Set the garbage collection frequency to weekly
     options = "--delete-older-than 14d"; # Remove generations older than 30 days

@@ -1,6 +1,8 @@
-  { config, pkgs, ... }: {
-
-
+{
+  config,
+  pkgs,
+  ...
+}: {
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -16,4 +18,4 @@
 
   # Configure console keymap
   console.keyMap = "uk";
-  }
+}

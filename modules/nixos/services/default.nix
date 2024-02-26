@@ -1,9 +1,7 @@
-{ ... }:
-
-{
+{...}: {
   imports = [
     ./pirate
     ./sabnzbd
-   # ./onedrive
+    # ./onedrive
   ];
 }
