@@ -33,9 +33,25 @@
   outputs = {
     self,
     nixpkgs,
+    home-manager,
     ...
-  } @ inputs: {
+  } @ inputs:
+
+  let
+      inherit (self) outputs;
+      lib = nixpkgs.lib // home-manager.lib;
+      systems = [ "x86_64-linux" "aarch64-linux" ];
+      forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
+      pkgsFor = lib.genAttrs systems (system: import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      });
+    in
+
+  {
+  inherit lib;
     #user = "leon";
+    packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
     nixosConfigurations = {
       slide-desktop = nixpkgs.lib.nixosSystem rec {

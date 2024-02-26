@@ -15,7 +15,7 @@
         ''
           $username$hostname($shlvl)($cmd_duration) $fill ($nix_shell)$custom
           $directory(${git})(${cloud}) $fill $time
-          $jobs$character
+          ($nix_shell)$custom$jobs$character
         '';
 
       fill = {
