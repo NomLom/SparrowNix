@@ -30,15 +30,16 @@
     # Additional inputs...
   };
 
-
-  outputs = {self, nixpkgs, ...}@inputs: {
-
-
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: {
     #user = "leon";
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
     nixosConfigurations = {
       slide-desktop = nixpkgs.lib.nixosSystem rec {
-      specialArgs = {inherit inputs;};
+        specialArgs = {inherit inputs;};
         system = "x86_64-linux";
 
         modules = [
@@ -66,7 +67,6 @@
             # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
           }
         ];
-
       };
     };
   };

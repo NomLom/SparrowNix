@@ -8,7 +8,7 @@ in {
   users.users.leon = {
     isNormalUser = true;
     description = "leon";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "multimedia"];
     packages = with pkgs; [
       firefox
       kate
@@ -93,9 +93,6 @@ in {
       rate = 48000;
     };
   };
-
-
-
 
   nix.gc = {
     automatic = true; # Enable automatic garbage collection
