@@ -40,6 +40,9 @@ in {
     gst_all_1.gst-plugins-bad
     gst_all_1.gst-libav
     ffmpeg
+    openssh
+    age
+    pinentry
     # Additional packages previously defined are merged here
   ];
 

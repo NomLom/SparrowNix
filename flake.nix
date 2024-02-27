@@ -23,6 +23,7 @@
     nix-gaming.url = "github:fufexan/nix-gaming";
     alejandra.url = "github:kamadorueda/alejandra/3.0.0";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.url = "github:Mic92/sops-nix";
     catppuccin-bat = {
       url = "github:catppuccin/bat";
       flake = false;
@@ -34,24 +35,22 @@
     self,
     nixpkgs,
     home-manager,
-     ...
-  } @ inputs:
-
-  let
-      inherit (self) outputs;
-      lib = nixpkgs.lib // home-manager.lib;
-      systems = [ "x86_64-linux" "aarch64-linux" ];
-      forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
-      pkgsFor = lib.genAttrs systems (system: import nixpkgs {
+    sops-nix,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
+    lib = nixpkgs.lib // home-manager.lib;
+    systems = ["x86_64-linux" "aarch64-linux"];
+    forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
+    pkgsFor = lib.genAttrs systems (system:
+      import nixpkgs {
         inherit system;
         config.allowUnfree = true;
       });
-    in
-
-  {
-  inherit lib;
+  in {
+    inherit lib;
     #user = "leon";
-    packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
+    packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs;});
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
     nixosConfigurations = {
       slide-desktop = nixpkgs.lib.nixosSystem rec {
@@ -69,7 +68,7 @@
           })
 
           ./hosts/slide-desktop
-
+          sops-nix.nixosModules.sops
           # make home-manager as a module of nixos
           # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
           inputs.home-manager.nixosModules.home-manager

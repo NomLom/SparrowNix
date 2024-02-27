@@ -1,10 +1,10 @@
-  {
+{
   config,
   lib,
   pkgs,
   ...
-}:{
-    programs.starship = {
+}: {
+  programs.starship = {
     enable = true;
     settings = {
       add_newline = false;
