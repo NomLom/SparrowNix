@@ -36,33 +36,34 @@
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
-    sops-nix,
     ...
   } @ inputs: let
     inherit (self) outputs;
-    lib = nixpkgs.lib // home-manager.lib;
-    systems = ["x86_64-linux" "aarch64-linux"];
-    forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
-    pkgsFor = lib.genAttrs systems (system:
-      import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      });
+    forAllSystems = nixpkgs.lib.genAttrs [
+      "aarch64-linux"
+      "i686-linux"
+      "x86_64-linux"
+      "aarch64-darwin"
+      "x86_64-darwin"
+      ];
   in rec {
     inherit nixpkgs;
     inherit nixpkgs-unstable;
-    inherit lib;
+
 
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
     #user = "leon";
-    packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs;});
+
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
-    nixosConfigurations = {
-      slide-desktop = nixpkgs.lib.nixosSystem rec {
-        specialArgs = {inherit inputs;};
-        system = "x86_64-linux";
+
+
+     nixosConfigurations = {
+      slide-desktop = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
         modules = [
+          ./hosts/slide-desktop/default.nix
+
           ({...}: {
             nixpkgs.overlays = [
               (final: prev: {
@@ -71,17 +72,18 @@
               })
             ];
           })
-          ./hosts/slide-desktop
-        ];
-      };
+    ];
     };
+    };
+
+
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager switch --flake .#leon@slide-desktop'
     # nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz home-manager
     # nix-channel --update
     homeConfigurations = {
-      "leon@lide-desktop" = home-manager.lib.homeManagerConfiguration {
+      "leon@slide-desktop" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
@@ -90,4 +92,5 @@
       };
     };
   };
-}
+  }
+
