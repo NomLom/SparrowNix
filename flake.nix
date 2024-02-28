@@ -53,7 +53,6 @@
     inherit nixpkgs-unstable;
     inherit lib;
 
-
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
     #user = "leon";
@@ -63,7 +62,6 @@
       slide-desktop = nixpkgs.lib.nixosSystem rec {
         specialArgs = {inherit inputs;};
         system = "x86_64-linux";
-
         modules = [
           ({...}: {
             nixpkgs.overlays = [
@@ -73,21 +71,19 @@
               })
             ];
           })
-
           ./hosts/slide-desktop
-          sops-nix.nixosModules.sops
-          # make home-manager as a module of nixos
-          # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-          inputs.home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
+        ];
+      };
+    };
 
-            home-manager.extraSpecialArgs = {inherit inputs outputs;};
-            home-manager.users.leon = import ./home-manager/home.nix;
-
-            # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
-          }
+    # Standalone home-manager configuration entrypoint
+    # Available through 'home-manager switch --flake .#leon@slide-desktop'
+    homeConfigurations = {
+      "leon@lide-desktop" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [
+          ./home-manager/home.nix
         ];
       };
     };

@@ -63,15 +63,15 @@
 
   # GPU
   hardware.nvidia = {
-  modesetting.enable = true;
-  nvidiaSettings = true;
-  open = false;
-};
+    modesetting.enable = true;
+    nvidiaSettings = true;
+    open = false;
+  };
   hardware.opengl = {
-  enable = true;
-  driSupport = true;
-  driSupport32Bit = true;
-};
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 

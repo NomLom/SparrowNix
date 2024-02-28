@@ -5,28 +5,17 @@
   config,
   pkgs,
   ...
-}:
-
-let
-  # Import the unstable channel
-
-in
-
-{
+}: {
   imports = [
     ../modules/satpaper.nix
   ];
 
-    nixpkgs = {
+  nixpkgs = {
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
-      outputs.overlays.additions
+      #   outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-
-      outputs.overlays.i3pyblocks
-
-      outputs.overlays.neorg
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -44,8 +33,6 @@ in
       allowUnfreePredicate = _: true;
     };
   };
-
-
 
   home.username = "leon";
   home.homeDirectory = "/home/leon";
@@ -70,8 +57,6 @@ in
     "Xcursor.size" = 16;
     "Xft.dpi" = 120;
   };
-
-
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
@@ -141,7 +126,6 @@ in
     pciutils # lspci
     usbutils # lsusb
     discord
-
   ];
 
   # basic configuration of git, please change to your own
