@@ -126,7 +126,7 @@
     pciutils # lspci
     usbutils # lsusb
     unstable.discord
-    unstable.warp-terminal
+ #   unstable.warp-terminal
   ];
 
   # basic configuration of git, please change to your own
