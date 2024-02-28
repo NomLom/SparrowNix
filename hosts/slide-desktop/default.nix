@@ -1,9 +1,10 @@
 # the NixOS manual (accessible by running ‘nixos-help’).
 {
+  inputs,
+  outputs,
+  lib,
   config,
   pkgs,
-  inputs,
-  lib,
   ...
 }: {
   imports = [
@@ -19,10 +20,76 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.nix-gaming.nixosModules.pipewireLowLatency
+
+
+    "${inputs.nixpkgs-unstable}/nixos/modules/services/audio/navidrome.nix"
+    "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/bazarr.nix"
+    "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/jackett.nix"
+    "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/radarr.nix"
+    "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/sonarr.nix"
+
   ];
 
+
+  disabledModules = [
+    "services/audio/navidrome.nix"
+    "services/misc/bazarr.nix"
+    "services/misc/jackett.nix"
+    "services/misc/radarr.nix"
+    "services/misc/sonarr.nix"
+  ];
+
+    nixpkgs = {
+    overlays = [
+      # Add overlays your own flake exports (from overlays and pkgs dir):
+    #  outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+
+   #   outputs.overlays.i3pyblocks
+
+      # You can also add overlays exported from other flakes:
+      # neovim-nightly-overlay.overlays.default
+
+      # Or define it inline, for example:
+      # (final: prev: {
+      #   hi = final.hello.overrideAttrs (oldAttrs: {
+      #     patches = [ ./change-hello-to-hi.patch ];
+      #   });
+      # })
+    ];
+    };
+
+    nix = {
+    # This will add each flake input as a registry
+    # To make nix commands consistent with your flake
+    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
+
+    # This will additionally add your inputs to the system's legacy channels
+    # Making legacy nix commands consistent as well, awesome!
+    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
+
+    settings = {
+      experimental-features = "nix-command flakes";
+      auto-optimise-store = true;
+      # NOTE (2024-01-21): The substituter logic currently has a bug that is being worked on
+      # https://github.com/NixOS/nix/issues/6901
+      # https://github.com/NixOS/nix/pull/8983
+     # substituters = ["http://rpi.local"];
+    };
+  };
+
   services.gnome.gnome-keyring.enable = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryFlavor = "gtk2";
+    enableSSHSupport = true;
+  };
+
+    programs.bash.enableCompletion = true;
+
+  programs.nix-ld.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -37,6 +104,12 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+    # Enable discovery on local network by hostname.
+  # https://github.com/NixOS/nixpkgs/issues/98050#issuecomment-1471678276
+  services.resolved.enable = true;
+  networking.networkmanager.connectionConfig."connection.mdns" = 2;
+  services.avahi.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/London";
@@ -56,7 +129,7 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  nix.settings.auto-optimise-store = true;
+
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

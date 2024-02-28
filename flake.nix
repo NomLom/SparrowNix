@@ -64,14 +64,14 @@
         modules = [
           ./hosts/slide-desktop/default.nix
 
-          ({...}: {
-            nixpkgs.overlays = [
-              (final: prev: {
-                # Add your unstable overlays :-)
-                sonarr = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.sonarr;
-              })
-            ];
-          })
+        #  ({...}: {
+        #    nixpkgs.overlays = [
+        #      (final: prev: {
+       #         # Add your unstable overlays :-)
+      #          sonarr = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.sonarr;
+     #         })
+    #        ];
+   #       })
     ];
     };
     };

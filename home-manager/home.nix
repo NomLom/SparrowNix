@@ -125,7 +125,8 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
-    discord
+    unstable.discord
+    unstable.warp-terminal
   ];
 
   # basic configuration of git, please change to your own
@@ -177,6 +178,12 @@
   #     urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
   #  };
   # };
+
+
+
+  # Nicely reload system units when changing configs
+  systemd.user.startServices = "sd-switch";
+
 
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage

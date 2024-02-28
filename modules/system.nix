@@ -5,6 +5,10 @@
 }: let
   username = "leon";
 in {
+
+
+
+
   users.users.leon = {
     isNormalUser = true;
     description = "leon";
@@ -47,6 +51,8 @@ in {
 
     dxvk
     lutris
+
+
     # Additional packages previously defined are merged here
   ];
 
