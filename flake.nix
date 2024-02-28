@@ -45,11 +45,10 @@
       "x86_64-linux"
       "aarch64-darwin"
       "x86_64-darwin"
-      ];
+    ];
   in rec {
     inherit nixpkgs;
     inherit nixpkgs-unstable;
-
 
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
@@ -57,26 +56,24 @@
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
 
-
-     nixosConfigurations = {
+    nixosConfigurations = {
       slide-desktop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./hosts/slide-desktop/default.nix
 
-        #  ({...}: {
-        #    nixpkgs.overlays = [
-        #      (final: prev: {
-       #         # Add your unstable overlays :-)
-      #          sonarr = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.sonarr;
-     #         })
-    #        ];
-   #       })
-    ];
+          #  ({...}: {
+          #    nixpkgs.overlays = [
+          #      (final: prev: {
+          #         # Add your unstable overlays :-)
+          #          sonarr = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.sonarr;
+          #         })
+          #        ];
+          #       })
+        ];
+      };
     };
-    };
-
-
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager switch --flake .#leon@slide-desktop'
@@ -92,5 +89,4 @@
       };
     };
   };
-  }
-
+}

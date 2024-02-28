@@ -21,15 +21,12 @@
     ./hardware-configuration.nix
     inputs.nix-gaming.nixosModules.pipewireLowLatency
 
-
     "${inputs.nixpkgs-unstable}/nixos/modules/services/audio/navidrome.nix"
     "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/bazarr.nix"
     "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/jackett.nix"
     "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/radarr.nix"
     "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/sonarr.nix"
-
   ];
-
 
   disabledModules = [
     "services/audio/navidrome.nix"
@@ -39,14 +36,14 @@
     "services/misc/sonarr.nix"
   ];
 
-    nixpkgs = {
+  nixpkgs = {
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
-    #  outputs.overlays.additions
+      #  outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
 
-   #   outputs.overlays.i3pyblocks
+      #   outputs.overlays.i3pyblocks
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -58,9 +55,9 @@
       #   });
       # })
     ];
-    };
+  };
 
-    nix = {
+  nix = {
     # This will add each flake input as a registry
     # To make nix commands consistent with your flake
     registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
@@ -75,7 +72,7 @@
       # NOTE (2024-01-21): The substituter logic currently has a bug that is being worked on
       # https://github.com/NixOS/nix/issues/6901
       # https://github.com/NixOS/nix/pull/8983
-     # substituters = ["http://rpi.local"];
+      # substituters = ["http://rpi.local"];
     };
   };
 
@@ -87,7 +84,7 @@
     enableSSHSupport = true;
   };
 
-    programs.bash.enableCompletion = true;
+  programs.bash.enableCompletion = true;
 
   programs.nix-ld.enable = true;
 
@@ -105,7 +102,7 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-    # Enable discovery on local network by hostname.
+  # Enable discovery on local network by hostname.
   # https://github.com/NixOS/nixpkgs/issues/98050#issuecomment-1471678276
   services.resolved.enable = true;
   networking.networkmanager.connectionConfig."connection.mdns" = 2;
@@ -128,8 +125,6 @@
     LC_TELEPHONE = "en_GB.UTF-8";
     LC_TIME = "en_GB.UTF-8";
   };
-
-
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
