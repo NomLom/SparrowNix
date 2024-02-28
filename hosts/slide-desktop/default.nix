@@ -62,8 +62,16 @@
   services.printing.enable = true;
 
   # GPU
-  hardware.nvidia.modesetting.enable = true;
-  hardware.opengl.enable = true;
+  hardware.nvidia = {
+  modesetting.enable = true;
+  nvidiaSettings = true;
+  open = false;
+};
+  hardware.opengl = {
+  enable = true;
+  driSupport = true;
+  driSupport32Bit = true;
+};
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
@@ -100,7 +108,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  #services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

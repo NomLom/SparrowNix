@@ -43,6 +43,9 @@ in {
     openssh
     age
     pinentry
+    wine
+    dxvk
+    lutris
     # Additional packages previously defined are merged here
   ];
 
@@ -96,6 +99,11 @@ in {
       rate = 48000;
     };
   };
+
+  boot.kernel.sysctl = {
+  "vm.max_map_count" = 16777216;
+  "fs.file-max" = 524288;
+};
 
   nix.gc = {
     automatic = true; # Enable automatic garbage collection
