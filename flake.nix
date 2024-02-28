@@ -34,6 +34,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-unstable,
     home-manager,
     sops-nix,
     ...
@@ -47,8 +48,14 @@
         inherit system;
         config.allowUnfree = true;
       });
-  in {
+  in rec {
+    inherit nixpkgs;
+    inherit nixpkgs-unstable;
     inherit lib;
+
+
+    # Your custom packages and modifications, exported as overlays
+    overlays = import ./overlays {inherit inputs;};
     #user = "leon";
     packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs;});
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
@@ -76,7 +83,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.extraSpecialArgs = {inherit inputs;};
+            home-manager.extraSpecialArgs = {inherit inputs outputs;};
             home-manager.users.leon = import ./home-manager/home.nix;
 
             # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix

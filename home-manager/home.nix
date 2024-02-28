@@ -1,12 +1,51 @@
 {
+  inputs,
+  outputs,
+  lib,
   config,
   pkgs,
-  inputs,
   ...
-}: {
+}:
+
+let
+  # Import the unstable channel
+
+in
+
+{
   imports = [
     ../modules/satpaper.nix
   ];
+
+    nixpkgs = {
+    overlays = [
+      # Add overlays your own flake exports (from overlays and pkgs dir):
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+
+      outputs.overlays.i3pyblocks
+
+      outputs.overlays.neorg
+
+      # You can also add overlays exported from other flakes:
+      # neovim-nightly-overlay.overlays.default
+
+      # Or define it inline, for example:
+      # (final: prev: {
+      #   hi = final.hello.overrideAttrs (oldAttrs: {
+      #     patches = [ ./change-hello-to-hi.patch ];
+      #   });
+      # })
+    ];
+    config = {
+      allowUnfree = true;
+      # Workaround for https://github.com/nix-community/home-manager/issues/2942
+      allowUnfreePredicate = _: true;
+    };
+  };
+
+
 
   home.username = "leon";
   home.homeDirectory = "/home/leon";
@@ -102,6 +141,7 @@
     pciutils # lspci
     usbutils # lsusb
     discord
+
   ];
 
   # basic configuration of git, please change to your own

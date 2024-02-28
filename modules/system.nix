@@ -43,7 +43,8 @@ in {
     openssh
     age
     pinentry
-    wine
+    wine64
+
     dxvk
     lutris
     # Additional packages previously defined are merged here
