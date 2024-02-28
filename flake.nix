@@ -78,6 +78,8 @@
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager switch --flake .#leon@slide-desktop'
+    # nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz home-manager
+    # nix-channel --update
     homeConfigurations = {
       "leon@lide-desktop" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
