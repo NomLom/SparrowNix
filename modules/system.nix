@@ -45,10 +45,12 @@ in {
     age
     pinentry
     wine64
+    vulkan-tools
 
-    dxvk
+    vulkan-validation-layers
+    dxvk_2
     lutris
-
+    nvidia-vaapi-driver
     # Additional packages previously defined are merged here
   ];
 

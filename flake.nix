@@ -21,6 +21,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-gaming.url = "github:fufexan/nix-gaming";
+    nix-citizen.url = "github:LovingMelody/nix-citizen";
+    nix-citizen.inputs.nix-gaming.follows = "nix-gaming";
     alejandra.url = "github:kamadorueda/alejandra/3.0.0";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";

@@ -62,7 +62,10 @@
   home.packages = with pkgs; [
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
-    inputs.nix-gaming.packages.${pkgs.system}.star-citizen
+   #   (inputs.nix-gaming.packages.${pkgs.system}.star-citizen.override (prev: {
+  #  wineDllOverrides = (prev.wineDllOverrides or "") ++ " dxgi=n";
+ # }))
+ inputs.nix-citizen.packages.${system}.star-citizen
     neofetch
     nnn # terminal file manager
 
