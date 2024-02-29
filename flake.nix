@@ -39,7 +39,7 @@
     nixpkgs-unstable,
     home-manager,
     ...
-  } @ inputs: let
+  } @inputs: let
     inherit (self) outputs;
     forAllSystems = nixpkgs.lib.genAttrs [
       "aarch64-linux"
@@ -48,12 +48,13 @@
       "aarch64-darwin"
       "x86_64-darwin"
     ];
-  in rec {
-    inherit nixpkgs;
-    inherit nixpkgs-unstable;
+
+  in  {
+   # inherit nixpkgs;
+  #  inherit nixpkgs-unstable;
 
     # Your custom packages and modifications, exported as overlays
-    overlays = import ./overlays {inherit inputs;};
+    #overlays = import ./overlays {inherit inputs;};
     #user = "leon";
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
@@ -61,7 +62,7 @@
     nixosConfigurations = {
       slide-desktop = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      #  config.allowUnfree = true;
+        config.allowUnfree = true;
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./hosts/slide-desktop/default.nix
@@ -85,6 +86,7 @@
     homeConfigurations = {
       "leon@slide-desktop" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        #config.allowUnfree = true;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           ./home-manager/home.nix

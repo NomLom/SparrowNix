@@ -44,13 +44,13 @@ in {
     openssh
     age
     pinentry
-    wine64
-    vulkan-tools
+   # wine64
+  #  vulkan-tools
 
-    vulkan-validation-layers
-    dxvk_2
-    lutris
-    nvidia-vaapi-driver
+  #  vulkan-validation-layers
+  #  dxvk_2
+  #  lutris
+ #   nvidia-vaapi-driver
     # Additional packages previously defined are merged here
   ];
 

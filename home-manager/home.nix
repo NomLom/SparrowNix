@@ -1,3 +1,4 @@
+
 {
   inputs,
   outputs,
@@ -9,13 +10,13 @@
   imports = [
     ../modules/satpaper.nix
   ];
-
+  #nixpkgs-unstable.config.allowUnfree = true;
   nixpkgs = {
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
       #   outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
+   #   outputs.overlays.modifications
+    #  outputs.overlays.unstable-packages
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -30,8 +31,12 @@
     config = {
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = _: true;
+      allowUnfreePredicate = (_: true);
     };
+  };
+  nixpkgs-unstable.config = {
+  allowUnfree = true;
+  allowUnfreePredicate = (_: true);
   };
 
   home.username = "leon";
@@ -128,8 +133,8 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
-    unstable.discord
- #   unstable.warp-terminal
+    inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.discord
+    inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.warp-terminal
   ];
 
   # basic configuration of git, please change to your own
