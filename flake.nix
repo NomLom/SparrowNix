@@ -61,7 +61,7 @@
     nixosConfigurations = {
       slide-desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        config.allowUnfree = true;
+        #config.allowUnfree = true;
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./hosts/slide-desktop/default.nix
