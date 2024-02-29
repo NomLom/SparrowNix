@@ -1,4 +1,3 @@
-
 {
   inputs,
   outputs,
@@ -6,56 +5,27 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  unstable = import inputs.nixpkgs-unstable {
+    system = "x86_64-linux";
+    config = {
+      allowUnfreePredicate = pkg: true;
+      allowUnfree = true;
+    };
+  };
+in {
   imports = [
     ../modules/satpaper.nix
   ];
-  #nixpkgs-unstable.config.allowUnfree = true;
   nixpkgs = {
-    overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      #   outputs.overlays.additions
-   #   outputs.overlays.modifications
-    #  outputs.overlays.unstable-packages
-
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
-    ];
     config = {
       allowUnfree = true;
-      # Workaround for https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = (_: true);
+      allowUnfreePredicate = _: true;
     };
-  };
-  nixpkgs-unstable.config = {
-  allowUnfree = true;
-  allowUnfreePredicate = (_: true);
   };
 
   home.username = "leon";
   home.homeDirectory = "/home/leon";
-
-  # link the configuration file in current directory to the specified location in home directory
-  # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
-
-  # link all files in `./scripts` to `~/.config/i3/scripts`
-  # home.file.".config/i3/scripts" = {
-  #   source = ./scripts;
-  #   recursive = true;   # link recursively
-  #   executable = true;  # make all files executable
-  # };
-
-  # encode the file content in nix configuration file directly
-  # home.file.".xxx".text = ''
-  #     xxx
-  # '';
 
   # set cursor size and dpi for 4k monitor
   xresources.properties = {
@@ -67,10 +37,10 @@
   home.packages = with pkgs; [
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
-   #   (inputs.nix-gaming.packages.${pkgs.system}.star-citizen.override (prev: {
-  #  wineDllOverrides = (prev.wineDllOverrides or "") ++ " dxgi=n";
- # }))
- inputs.nix-citizen.packages.${system}.star-citizen
+    #   (inputs.nix-gaming.packages.${pkgs.system}.star-citizen.override (prev: {
+    #  wineDllOverrides = (prev.wineDllOverrides or "") ++ " dxgi=n";
+    # }))
+    inputs.nix-citizen.packages.${system}.star-citizen
     neofetch
     nnn # terminal file manager
 
@@ -133,8 +103,8 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
-    inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.discord
-    inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.warp-terminal
+    unstable.discord
+    unstable.warp-terminal
   ];
 
   # basic configuration of git, please change to your own

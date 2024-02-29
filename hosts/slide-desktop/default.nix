@@ -1,5 +1,4 @@
 # the NixOS manual (accessible by running ‘nixos-help’).
-
 {
   inputs,
   outputs,
@@ -41,8 +40,8 @@
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
       #  outputs.overlays.additions
-    #  outputs.overlays.modifications
-   #   outputs.overlays.unstable-packages
+      #  outputs.overlays.modifications
+      #   outputs.overlays.unstable-packages
 
       #   outputs.overlays.i3pyblocks
 
@@ -136,17 +135,17 @@
     nvidiaSettings = true;
     open = false;
   };
-hardware.opengl = {
-  enable = true;
-  driSupport = true;
-  driSupport32Bit = true;
-  extraPackages = with pkgs; [
-    vaapiVdpau
-    libvdpau-va-gl
-  ];
-  extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
-  setLdLibraryPath = true;
-};
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+    extraPackages = with pkgs; [
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [libva];
+    setLdLibraryPath = true;
+  };
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 

@@ -14,21 +14,18 @@
     bazarr = final.unstable.bazarr;
     jackett = final.unstable.jackett;
     navidrome = final.unstable.navidrome;
-   # sonarr = final.unstable.sonarr;
+    # sonarr = final.unstable.sonarr;
     radarr = final.unstable.radarr;
     warp-terminal = prev.pfetch.overrideAttrs (oldAttrs: {
       version = "0.2024.02.20.08.01.stable_02";
-    src = final.fetchurl {
-    url = "https://releases.warp.dev/stable/v0.2024.02.20.08.01.stable_02/warp-terminal-v0.2024.02.20.08.01.stable_02-1-x86_64.pkg.tar.zst";
-    hash = "0000000000000000000000";
-  };
-      });
+      src = final.fetchurl {
+        url = "https://releases.warp.dev/stable/v0.2024.02.20.08.01.stable_02/warp-terminal-v0.2024.02.20.08.01.stable_02-1-x86_64.pkg.tar.zst";
+        hash = "0000000000000000000000";
+      };
+    });
   };
 
   #  comma = final.unstable.comma;
-
-
-
 
   # # neovim 0.8.1 of nixpkgs-22.11 has some problems with the copilot plugin
   # # Update 2023-06-08:
