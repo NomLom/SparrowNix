@@ -25,6 +25,7 @@
     nix-citizen.inputs.nix-gaming.follows = "nix-gaming";
     alejandra.url = "github:kamadorueda/alejandra/3.0.0";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.url = "github:ryantm/agenix";
     sops-nix.url = "github:Mic92/sops-nix";
     catppuccin-bat = {
       url = "github:catppuccin/bat";
@@ -38,6 +39,7 @@
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
+    agenix,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -48,7 +50,7 @@
       "aarch64-darwin"
       "x86_64-darwin"
     ];
-  in  {
+  in {
     # inherit nixpkgs;
     #  inherit nixpkgs-unstable;
 
@@ -65,7 +67,7 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./hosts/slide-desktop/default.nix
-
+          agenix.nixosModules.default
           #  ({...}: {
           #    nixpkgs.overlays = [
           #      (final: prev: {

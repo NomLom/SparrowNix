@@ -44,6 +44,8 @@ in {
     openssh
     age
     pinentry
+    inputs.agenix.packages.${system}.default
+    trufflehog
     # wine64
     #  vulkan-tools
 

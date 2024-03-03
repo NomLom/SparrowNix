@@ -1,5 +1,5 @@
 #
- {
+{
   config,
   inputs,
   lib,
@@ -7,8 +7,6 @@
   options,
   ...
 }: {
-
-
   system.activationScripts.setPermissions = {
     text = ''
       chown -R :multimedia /mnt/SSD/arr/ /mnt/media/media/
