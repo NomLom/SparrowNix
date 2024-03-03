@@ -7,7 +7,7 @@
   ...
 }: let
   unstable = import inputs.nixpkgs-unstable {
-    system = "x86_64-linux";
+    system = pkgs.system;
     config = {
       allowUnfreePredicate = pkg: true;
       allowUnfree = true;
@@ -43,6 +43,7 @@ in {
     inputs.nix-citizen.packages.${system}.star-citizen
     neofetch
     nnn # terminal file manager
+    neovim
 
     # archives
     zip

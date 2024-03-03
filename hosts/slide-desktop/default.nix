@@ -1,4 +1,7 @@
 # the NixOS manual (accessible by running ‘nixos-help’).
+# return to 23.11
+# sudo nix-channel --add https://nixos.org/channels/nixos-23.11 nixos
+# https://discourse.nixos.org/t/enable-plasma-6/40541
 {
   inputs,
   outputs,
