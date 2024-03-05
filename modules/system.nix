@@ -29,6 +29,8 @@ in {
 
   environment.systemPackages = with pkgs; [
     vim
+    acl
+    kio-admin
     wget
     git
     curl

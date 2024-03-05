@@ -105,6 +105,30 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # Disable NetworkManager if you're going to use systemd-networkd for static configuration
+  # networking.networkmanager.enable = false;
+
+  # Enable systemd-networkd
+   # networking.useNetworkd = true;
+
+ # Disable NetworkManager
+ # networking.networkmanager.enable = false;
+
+  # Enable systemd-networkd
+ # networking.useNetworkd = true;
+
+  # Define your static IP configuration for the wireless interface
+ # systemd.network.networks = {
+ #   "lom" = {
+  #    matchConfig.Name = "wlo1";
+  #    networkConfig = {
+  #      Address = "192.168.0.100/24";
+  #      Gateway = "192.168.0.1";
+  #      DNS = [ "192.168.0.1" ];
+   #   };
+  #  };
+#  };
+
   # Enable discovery on local network by hostname.
   # https://github.com/NixOS/nixpkgs/issues/98050#issuecomment-1471678276
   services.resolved.enable = true;

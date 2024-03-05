@@ -10,7 +10,7 @@
     # Specify the user and group under which SABnzbd will run
     user = "sabnzbd";
     group = "multimedia";
-
+    configFile = "/mnt/SSD/arr/config/sabnzbd/sabnzbd.ini";
     # For custom configurations, you can specify the configuration file path
     # configFile = "/path/to/your/sabnzbd.ini";
   };
@@ -19,7 +19,7 @@
   users.users.sabnzbd = {
     isSystemUser = true;
     group = "sabnzbd";
-    home = lib.mkForce "/var/lib/sabnzbd"; # Force the use of this home directory
+    home = lib.mkForce "/mnt/SSD/arr/config/sabnzbd/"; # Force the use of this home directory
     createHome = true;
   };
 

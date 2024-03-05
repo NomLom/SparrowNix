@@ -106,6 +106,7 @@ in {
     usbutils # lsusb
     unstable.discord
     unstable.warp-terminal
+    brave
   ];
 
   # basic configuration of git, please change to your own
