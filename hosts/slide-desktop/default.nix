@@ -22,7 +22,7 @@
     ../../modules/nixos/services/default.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    inputs.nix-gaming.nixosModules.pipewireLowLatency
+    #inputs.nix-gaming.nixosModules.pipewireLowLatency
 
     "${inputs.nixpkgs-unstable}/nixos/modules/services/audio/navidrome.nix"
     "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/bazarr.nix"
@@ -41,22 +41,6 @@
 
   nixpkgs = {
     overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      #  outputs.overlays.additions
-      #  outputs.overlays.modifications
-      #   outputs.overlays.unstable-packages
-
-      #   outputs.overlays.i3pyblocks
-
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
     ];
   };
 
@@ -95,39 +79,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "slide-desktop"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
+  networking.hostName = "slide-desktop";
+  # networking.wireless.enable = true;
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Disable NetworkManager if you're going to use systemd-networkd for static configuration
-  # networking.networkmanager.enable = false;
-
-  # Enable systemd-networkd
-   # networking.useNetworkd = true;
-
- # Disable NetworkManager
- # networking.networkmanager.enable = false;
-
-  # Enable systemd-networkd
- # networking.useNetworkd = true;
-
-  # Define your static IP configuration for the wireless interface
- # systemd.network.networks = {
- #   "lom" = {
-  #    matchConfig.Name = "wlo1";
-  #    networkConfig = {
-  #      Address = "192.168.0.100/24";
-  #      Gateway = "192.168.0.1";
-  #      DNS = [ "192.168.0.1" ];
-   #   };
-  #  };
-#  };
 
   # Enable discovery on local network by hostname.
   # https://github.com/NixOS/nixpkgs/issues/98050#issuecomment-1471678276
@@ -159,8 +115,10 @@
   # GPU
   hardware.nvidia = {
     modesetting.enable = true;
+    powerManagement.enable = true;
     nvidiaSettings = true;
     open = false;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;# stable, production, latest, beta, or vulkan_beta
   };
   hardware.opengl = {
     enable = true;
@@ -174,7 +132,7 @@
     setLdLibraryPath = true;
   };
   services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+
 
   programs.thunar.plugins = with pkgs.xfce; [
     thunar-archive-plugin

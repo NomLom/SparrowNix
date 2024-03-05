@@ -48,6 +48,8 @@ in {
     pinentry
     inputs.agenix.packages.${system}.default
     trufflehog
+    helvum
+    easyeffects
     # wine64
     #  vulkan-tools
 
@@ -100,13 +102,13 @@ in {
     alsa.support32Bit = true;
     pulse.enable = true;
     #jack.enable = true; # If you want to use JACK applications, uncomment this
-    lowLatency = {
+   # lowLatency = {
       # enable this module
-      enable = true;
+   #   enable = true;
       # defaults (no need to be set unless modified)
-      quantum = 64;
-      rate = 48000;
-    };
+  #   quantum = 64;
+   #   rate = 48000;
+  #  };
   };
 
   boot.kernel.sysctl = {
