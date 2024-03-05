@@ -2,6 +2,15 @@
   description = "Slides's NixOS Flake";
 
   nixConfig = {
+  substituters = [
+
+        "https://nix-community.cachix.org"
+        "https://cache.nixos.org/"
+      ];
+      trusted-public-keys = [
+
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
     # substituers will be appended to the default substituters when fetching packages
     # nix com    extra-substituters = [munity's cache server
     extra-substituters = [
