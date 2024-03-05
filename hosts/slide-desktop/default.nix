@@ -24,19 +24,19 @@
     ./hardware-configuration.nix
     #inputs.nix-gaming.nixosModules.pipewireLowLatency
 
-    "${inputs.nixpkgs-unstable}/nixos/modules/services/audio/navidrome.nix"
-    "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/bazarr.nix"
-    "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/jackett.nix"
-    "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/radarr.nix"
-    "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/sonarr.nix"
+  #  "${inputs.nixpkgs-unstable}/nixos/modules/services/audio/navidrome.nix"
+   # "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/bazarr.nix"
+   # "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/jackett.nix"
+   # "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/radarr.nix"
+   # "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/sonarr.nix"
   ];
 
   disabledModules = [
-    "services/audio/navidrome.nix"
-    "services/misc/bazarr.nix"
-    "services/misc/jackett.nix"
-    "services/misc/radarr.nix"
-    "services/misc/sonarr.nix"
+ #   "services/audio/navidrome.nix"
+  #  "services/misc/bazarr.nix"
+  #  "services/misc/jackett.nix"
+  #  "services/misc/radarr.nix"
+  #  "services/misc/sonarr.nix"
   ];
 
   nixpkgs = {

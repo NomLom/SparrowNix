@@ -30,7 +30,7 @@ in {
   environment.systemPackages = with pkgs; [
     vim
     acl
-    kio-admin
+   # kio-admin
     wget
     git
     curl

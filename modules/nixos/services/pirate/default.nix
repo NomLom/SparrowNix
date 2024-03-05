@@ -13,7 +13,7 @@
     dataDir = "/mnt/SSD/arr/config/radarr/";
     user = "radarr";
     group = "multimedia";
-    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.radarr;
+  #  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.radarr;
   };
 
   services.sonarr = {
@@ -21,7 +21,7 @@
     dataDir = "/mnt/SSD/arr/config/sonarr/";
     user = "sonarr";
     group = "multimedia";
-    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.sonarr;
+  #  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.sonarr;
   };
 
   services.jellyfin = {
