@@ -29,6 +29,7 @@
     dataDir = "/mnt/SSD/arr/config/lidarr/";
     user = "lidarr";
     group = "multimedia";
+    openFirewall = true;
   #  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.sonarr;
   };
 
@@ -39,7 +40,7 @@
     group = "multimedia";
   };
 
-  networking.firewall.allowedTCPPorts = [ 8920 7878 8989 8096];
+  networking.firewall.allowedTCPPorts = [ 8920 7878 8989 8096 8686];
   # Configure config directorys
   users.users.radarr = {
     isSystemUser = true;
@@ -55,7 +56,7 @@
 
     users.users.lidarr = {
     isSystemUser = true;
-    home = "/mnt/SSD/arr/config/lidarr/";
+  #  home = "/mnt/SSD/arr/config/lidarr/";
     createHome = true;
   };
 
