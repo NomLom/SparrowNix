@@ -50,6 +50,7 @@ in {
     trufflehog
     helvum
     easyeffects
+
     # wine64
     #  vulkan-tools
 

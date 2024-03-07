@@ -24,6 +24,14 @@
   #  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.sonarr;
   };
 
+    services.lidarr = {
+    enable = true;
+    dataDir = "/mnt/SSD/arr/config/lidarr/";
+    user = "lidarr";
+    group = "multimedia";
+  #  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.sonarr;
+  };
+
   services.jellyfin = {
     enable = true;
 
@@ -31,7 +39,7 @@
     group = "multimedia";
   };
 
-  networking.firewall.allowedTCPPorts = [ 8920 7878 8989];
+  networking.firewall.allowedTCPPorts = [ 8920 7878 8989 8096];
   # Configure config directorys
   users.users.radarr = {
     isSystemUser = true;
@@ -42,6 +50,12 @@
   users.users.sonarr = {
     isSystemUser = true;
     home = "/mnt/SSD/arr/config/sonarr/";
+    createHome = true;
+  };
+
+    users.users.lidarr = {
+    isSystemUser = true;
+    home = "/mnt/SSD/arr/config/lidarr/";
     createHome = true;
   };
 

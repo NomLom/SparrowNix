@@ -131,7 +131,8 @@
     extraPackages32 = with pkgs.pkgsi686Linux; [libva];
     setLdLibraryPath = true;
   };
-  services.xserver.videoDrivers = ["nvidia"];
+    services.xserver.videoDrivers = lib.mkDefault [ "nvidia" ];
+
 
 
   programs.thunar.plugins = with pkgs.xfce; [

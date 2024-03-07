@@ -107,6 +107,7 @@ in {
     unstable.discord
     unstable.warp-terminal
     brave
+    celeste64
   ];
 
   # basic configuration of git, please change to your own
