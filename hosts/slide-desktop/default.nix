@@ -158,8 +158,8 @@ in config.boot.kernelPackages.nvidiaPackages.mkDriver {
     patches = [ rcu_patch ];
  };
 
-boot.initrd.kernelModules = [ "nvidia" ];
-boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
+#boot.initrd.kernelModules = [ "nvidia" ];
+#boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
 
 
