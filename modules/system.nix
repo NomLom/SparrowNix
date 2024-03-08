@@ -63,19 +63,19 @@ in {
     vulkan-tools
 
     # GUI DE tools
-    gnome.gnome-disk-utility
-    kate
-    kcharselect
-    libsForQt5.kcalc
-    libsForQt5.kdeconnect-kde
-    libsForQt5.plasma-disks
-    pavucontrol
+  #  gnome.gnome-disk-utility
+  #  kate
+  #  kcharselect
+  #  libsForQt5.kcalc
+  #  libsForQt5.kdeconnect-kde
+  #  libsForQt5.plasma-disks
+  #  pavucontrol
 
     # Feel and look
-    papirus-icon-theme
-    qogir-kde
-    qogir-theme
-    qogir-icon-theme
+  #  papirus-icon-theme
+  #  qogir-kde
+  #  qogir-theme
+  #  qogir-icon-theme
 
     # Internet
     akregator
@@ -93,8 +93,8 @@ in {
     vlc
 
     # Graphics
-    krita
-    pinta
+   # krita
+   # pinta
 
     # Development
     notepadqq
@@ -109,22 +109,22 @@ in {
     standardnotes
 
     # Emulators
-    fsuae
-    fsuae-launcher
+   # fsuae
+   # fsuae-launcher
 
     # File Tools
     doublecmd
     #veracrypt
 
     # Backup, sync
-    backintime
-    grsync
+   # backintime
+   # grsync
     #nextcloud-client
 
     # System
-    appimage-run
-    home-manager
-    psmisc
+   # appimage-run
+   # home-manager
+   # psmisc
 
     # wine64
     #  vulkan-tools
