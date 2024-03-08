@@ -117,8 +117,6 @@ in {
     userEmail = "leon.sparrow@gmail.com";
   };
 
-
-
   # alacritty - a cross-platform, GPU-accelerated terminal emulator
   # programs.alacritty = {
   #   enable = true;

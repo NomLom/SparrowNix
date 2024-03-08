@@ -30,7 +30,7 @@ in {
   environment.systemPackages = with pkgs; [
     vim
     acl
-   # kio-admin
+    # kio-admin
     wget
     git
     curl
@@ -50,6 +50,81 @@ in {
     trufflehog
     helvum
     easyeffects
+
+    # Hardware info
+    clinfo
+    fwupd
+    glxinfo
+    gsmartcontrol
+    hwinfo
+    usbutils
+    pciutils
+    smartmontools
+    vulkan-tools
+
+    # GUI DE tools
+    gnome.gnome-disk-utility
+    kate
+    kcharselect
+    libsForQt5.kcalc
+    libsForQt5.kdeconnect-kde
+    libsForQt5.plasma-disks
+    pavucontrol
+
+    # Feel and look
+    papirus-icon-theme
+    qogir-kde
+    qogir-theme
+    qogir-icon-theme
+
+    # Internet
+    akregator
+    signal-desktop
+
+    # Media
+    audacious
+    ffmpeg
+    freetube
+    kid3
+    mpv
+    shortwave
+    strawberry
+    tidal-hifi
+    vlc
+
+    # Graphics
+    krita
+    pinta
+
+    # Development
+    notepadqq
+    vscodium
+
+    # Office
+    freeoffice
+    hunspell
+    joplin-desktop
+    keepassxc
+    libreoffice-qt
+    standardnotes
+
+    # Emulators
+    fsuae
+    fsuae-launcher
+
+    # File Tools
+    doublecmd
+    #veracrypt
+
+    # Backup, sync
+    backintime
+    grsync
+    #nextcloud-client
+
+    # System
+    appimage-run
+    home-manager
+    psmisc
 
     # wine64
     #  vulkan-tools
@@ -103,13 +178,13 @@ in {
     alsa.support32Bit = true;
     pulse.enable = true;
     #jack.enable = true; # If you want to use JACK applications, uncomment this
-   # lowLatency = {
-      # enable this module
-   #   enable = true;
-      # defaults (no need to be set unless modified)
-  #   quantum = 64;
-   #   rate = 48000;
-  #  };
+    # lowLatency = {
+    # enable this module
+    #   enable = true;
+    # defaults (no need to be set unless modified)
+    #   quantum = 64;
+    #   rate = 48000;
+    #  };
   };
 
   boot.kernel.sysctl = {
