@@ -50,81 +50,81 @@ in {
     trufflehog
     helvum
     easyeffects
+    curseradio
 
     # Hardware info
-    clinfo
-    fwupd
-    glxinfo
-    gsmartcontrol
-    hwinfo
-    usbutils
-    pciutils
-    smartmontools
-    vulkan-tools
+    #   clinfo
+    #   fwupd
+    #  glxinfo
+    ##   gsmartcontrol
+    #  hwinfo
+    #  usbutils
+    #   pciutils
+    #  smartmontools
+    #  vulkan-tools
 
     # GUI DE tools
-  #  gnome.gnome-disk-utility
-  #  kate
-  #  kcharselect
-  #  libsForQt5.kcalc
-  #  libsForQt5.kdeconnect-kde
-  #  libsForQt5.plasma-disks
-  #  pavucontrol
+    #  gnome.gnome-disk-utility # this will break plasma 6 display manager
+    #  kate
+    #  kcharselect
+    #  libsForQt5.kcalc
+    #  libsForQt5.kdeconnect-kde
+    #  libsForQt5.plasma-disks
+    #  pavucontrol
 
     # Feel and look
-  #  papirus-icon-theme
-  #  qogir-kde
-  #  qogir-theme
-  #  qogir-icon-theme
+    #  papirus-icon-theme
+    #  qogir-kde
+    #  qogir-theme
+    #  qogir-icon-theme
 
     # Internet
-    akregator
-    signal-desktop
+    #  akregator
+    # signal-desktop
 
     # Media
-    audacious
-    ffmpeg
-    freetube
-    kid3
-    mpv
-    shortwave
-    strawberry
-    tidal-hifi
-    vlc
+    #  audacious
+    #   ffmpeg
+    #   freetube
+    #   kid3
+    #   mpv
+    #   shortwave
+
+    #  vlc
 
     # Graphics
-   # krita
-   # pinta
+    #   krita
+    #   pinta
 
     # Development
     notepadqq
-    vscodium
+    #  vscodium
 
     # Office
-    freeoffice
-    hunspell
-    joplin-desktop
-    keepassxc
-    libreoffice-qt
-    standardnotes
+    #    freeoffice
+    #   hunspell
+    #   joplin-desktop
+    #  keepassxc
+    #  libreoffice-qt
+    #   standardnotes
 
     # Emulators
-   # fsuae
-   # fsuae-launcher
+    # fsuae
+    # fsuae-launcher
 
     # File Tools
-    doublecmd
+    #  doublecmd
     #veracrypt
 
     # Backup, sync
-   # backintime
-   # grsync
+    #  backintime
+    #  grsync
     #nextcloud-client
 
     # System
-   # appimage-run
-   # home-manager
-   # psmisc
+    # appimage-run
+    # home-manager
+    # psmisc
 
     # wine64
     #  vulkan-tools
@@ -193,8 +193,8 @@ in {
   };
 
   nix.gc = {
-    automatic = true; # Enable automatic garbage collection
-    dates = "weekly"; # Set the garbage collection frequency to weekly
-    options = "--delete-older-than 14d"; # Remove generations older than 30 days
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
   };
 }
