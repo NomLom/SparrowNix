@@ -13,7 +13,7 @@
   imports = [
     ../../modules/system.nix
     ../../modules/fonts.nix
-    ../../modules/virtualisation.nix
+   # ../../modules/virtualisation.nix
     ../../modules/smartmon.nix
     ../../modules/plasma.nix
     ../../modules/starship.nix
