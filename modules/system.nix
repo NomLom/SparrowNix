@@ -9,7 +9,7 @@ in {
   users.users.leon = {
     isNormalUser = true;
     description = "leon";
-    extraGroups = ["networkmanager" "wheel" "multimedia"];
+    extraGroups = ["networkmanager" "wheel" "multimedia" "kvm" "libvirtd"];
     packages = with pkgs; [
       firefox
       kate
@@ -35,6 +35,7 @@ in {
     git
     curl
     gvfs
+    autojump
     xfce.thunar
     kde-gtk-config
     gst_all_1.gst-plugins-base
@@ -42,26 +43,49 @@ in {
     gst_all_1.gst-plugins-ugly
     gst_all_1.gst-plugins-bad
     gst_all_1.gst-libav
+    #libnvcuvid1
+    #libnvidia-encode1
     ffmpeg
     openssh
     age
-    pinentry
+
     inputs.agenix.packages.${system}.default
     trufflehog
     helvum
     easyeffects
     curseradio
+    cava
+    flameshot
+    flatpak
+    feh
+    powershell
+    kitty
+    gparted
+    mangohud
+    protonup-ng
+    python3Full
+    #python.pkgs.pip
+    qemu
+    ripgrep
+    #rofi
+    steam
+    steam-run
+
+
+
+    vkd3d
+    dxvk_2
 
     # Hardware info
-    #   clinfo
-    #   fwupd
-    #  glxinfo
+       clinfo
+       fwupd
+      glxinfo
     ##   gsmartcontrol
-    #  hwinfo
-    #  usbutils
-    #   pciutils
+       hwinfo
+       usbutils
+       pciutils
     #  smartmontools
-    #  vulkan-tools
+      vulkan-tools
 
     # GUI DE tools
     #  gnome.gnome-disk-utility # this will break plasma 6 display manager
@@ -83,7 +107,7 @@ in {
     # signal-desktop
 
     # Media
-    #  audacious
+    #   audacious
     #   ffmpeg
     #   freetube
     #   kid3
@@ -121,11 +145,6 @@ in {
     #  grsync
     #nextcloud-client
 
-    # System
-    # appimage-run
-    # home-manager
-    # psmisc
-
     # wine64
     #  vulkan-tools
 
@@ -136,6 +155,7 @@ in {
     # Additional packages previously defined are merged here
   ];
 
+  services.flatpak.enable = true;
   # Enable the systemd timer for periodic TRIM on SSDs.
   services.fstrim.enable = true;
 

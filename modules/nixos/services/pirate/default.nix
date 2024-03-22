@@ -38,7 +38,13 @@
 
     user = "jellyfin";
     group = "multimedia";
+
   };
+    environment.systemPackages = [
+    pkgs.jellyfin
+    pkgs.jellyfin-web
+    pkgs.jellyfin-ffmpeg
+  ];
 
   networking.firewall.allowedTCPPorts = [8920 7878 8989 8096 8686];
   # Configure config directorys

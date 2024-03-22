@@ -44,6 +44,15 @@ in {
     neofetch
     nnn # terminal file manager
     neovim
+    asciiquarium-transparent
+
+    lutris
+#    (lutris.override {
+ #   extraPkgs = pkgs: [
+ #       wineWowPackages.stable
+ #   winetricks
+ #   ];
+  #  })
 
     # archives
     zip
@@ -78,6 +87,7 @@ in {
     gawk
     zstd
     gnupg
+    emacs
 
     # nix related
     #

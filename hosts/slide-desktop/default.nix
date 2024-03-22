@@ -13,7 +13,7 @@
   imports = [
     ../../modules/system.nix
     ../../modules/fonts.nix
-   # ../../modules/virtualisation.nix
+    ../../modules/virtualisation.nix
     ../../modules/smartmon.nix
     ../../modules/plasma.nix
     ../../modules/starship.nix
@@ -119,6 +119,8 @@
     extraPackages = with pkgs; [
       vaapiVdpau
       libvdpau-va-gl
+      libva
+      vulkan-loader
     ];
     extraPackages32 = with pkgs.pkgsi686Linux; [libva];
     setLdLibraryPath = true;
