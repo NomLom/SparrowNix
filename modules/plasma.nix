@@ -15,7 +15,7 @@
     xkb.layout = "gb";
     xkb.variant = "";
   };
-  #programs.dconf.enable = true;
+  #programs.dconf.enable = true; g
 
   # Configure console keymap
   console.keyMap = "uk";
