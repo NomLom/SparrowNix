@@ -10,11 +10,12 @@
   services.xserver = {
     displayManager.sddm.enable = true;
     displayManager.sddm.wayland.enable = true;
-    desktopManager.plasma6.enable = true;
+   # desktopManager.plasma6.enable = true;
     displayManager.defaultSession = "plasmax11";
     xkb.layout = "gb";
     xkb.variant = "";
   };
+  services.desktopManager.plasma6.enable = true;
   #programs.dconf.enable = true; g
 
   # Configure console keymap

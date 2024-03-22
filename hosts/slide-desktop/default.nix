@@ -17,7 +17,7 @@
     ../../modules/smartmon.nix
     ../../modules/plasma.nix
     ../../modules/starship.nix
-    ../../modules/passwordstore.nix
+   # ../../modules/passwordstore.nix
     # ../../modules/satpaper.nix
     ../../modules/nixos/services/default.nix
     # Include the results of the hardware scan.
@@ -65,11 +65,11 @@
 
   services.gnome.gnome-keyring.enable = true;
 
-  programs.gnupg.agent = {
-    enable = true;
-    pinentryFlavor = "gtk2";
-    enableSSHSupport = true;
-  };
+ # programs.gnupg.agent = {
+  #  enable = true;
+  #  pinentryPackage = "gtk2";
+#    enableSSHSupport = true;
+#  };
 
   programs.bash.enableCompletion = true;
 
