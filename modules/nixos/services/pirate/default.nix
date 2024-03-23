@@ -16,6 +16,16 @@
     #  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.radarr;
   };
 
+  users.groups.multimedia = {};
+  services.readarr = {
+    enable = true;
+    dataDir = "/mnt/SSD/arr/config/readarr/";
+    user = "readarr";
+    group = "multimedia";
+    openFirewall = true;
+    #  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.readarr;
+  };
+
   services.sonarr = {
     enable = true;
     dataDir = "/mnt/SSD/arr/config/sonarr/";
@@ -57,6 +67,12 @@
   users.users.sonarr = {
     isSystemUser = true;
     home = "/mnt/SSD/arr/config/sonarr/";
+    createHome = true;
+  };
+
+    users.users.readarr = {
+    isSystemUser = true;
+    home = "/mnt/SSD/arr/config/readarr/";
     createHome = true;
   };
 

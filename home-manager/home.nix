@@ -89,6 +89,10 @@ in {
     gnupg
     emacs
 
+    calibre
+    foliate
+    bookworm
+
     # nix related
     #
     # it provides the command `nom` works just like `nix`
