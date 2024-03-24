@@ -76,8 +76,6 @@ in {
     gnupg
     emacs
 
-
-
     # nix related
     #
     # it provides the command `nom` works just like `nix`
