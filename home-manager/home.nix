@@ -46,7 +46,7 @@ in {
     neovim
     asciiquarium-transparent
 
-    lutris
+
 #    (lutris.override {
  #   extraPkgs = pkgs: [
  #       wineWowPackages.stable

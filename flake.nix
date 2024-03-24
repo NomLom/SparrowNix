@@ -79,7 +79,7 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./hosts/slide-desktop/default.nix
-          agenix.nixosModules.default
+          #agenix.nixosModules.default
           #  ({...}: {
           #    nixpkgs.overlays = [
           #      (final: prev: {
@@ -102,7 +102,7 @@
         #config.allowUnfree = true;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          ./home-manager/home.nix
+          ./hosts/slide-desktop/home.nix
         ];
       };
     };

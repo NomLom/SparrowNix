@@ -14,6 +14,7 @@
       libvdpau-va-gl
       libva
       vulkan-loader
+      vulkan-tools
     ];
     extraPackages32 = with pkgs.pkgsi686Linux; [libva];
     setLdLibraryPath = true;

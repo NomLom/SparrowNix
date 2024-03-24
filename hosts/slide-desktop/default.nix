@@ -18,14 +18,12 @@
     ../../modules/plasma6.nix
     ../../modules/starship.nix
     ../../modules/nvidiaRTX.nix
-   # ../../modules/passwordstore.nix
-    # ../../modules/satpaper.nix
     ../../modules/nixos/services/default.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     #inputs.nix-gaming.nixosModules.pipewireLowLatency
 
-    #  "${inputs.nixpkgs-unstable}/nixos/modules/services/audio/navidrome.nix"
+    # "${inputs.nixpkgs-unstable}/nixos/modules/services/audio/navidrome.nix"
     # "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/bazarr.nix"
     # "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/jackett.nix"
     # "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/radarr.nix"
