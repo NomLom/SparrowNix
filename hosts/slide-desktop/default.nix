@@ -11,7 +11,7 @@
   ...
 }: {
   imports = [
-    ../../modules/system.nix
+    ../../modules/common.nix
     ../../modules/fonts.nix
     ../../modules/virtualisation.nix
     ../../modules/smartmon.nix
