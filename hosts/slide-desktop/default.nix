@@ -15,7 +15,7 @@
     ../../modules/fonts.nix
     ../../modules/virtualisation.nix
     ../../modules/smartmon.nix
-    ../../modules/plasma.nix
+    ../../modules/plasma6.nix
     ../../modules/starship.nix
    # ../../modules/passwordstore.nix
     # ../../modules/satpaper.nix
