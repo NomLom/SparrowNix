@@ -13,7 +13,7 @@
   imports = [
     ../../modules/common.nix
     ../../modules/fonts.nix
-    ../../modules/virtualisation.nix
+    #../../modules/virtualisation.nix
     ../../modules/smartmon.nix
     ../../modules/plasma6.nix
     ../../modules/starship.nix
@@ -86,7 +86,7 @@
   ];
 
   # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
+  services.xserver.displayManager.autoLogin.enable = false;
   services.xserver.displayManager.autoLogin.user = "leon";
 
   # List packages installed in system profile. To search, run:

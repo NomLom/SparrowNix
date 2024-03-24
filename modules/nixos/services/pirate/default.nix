@@ -25,9 +25,6 @@
     group = "multimedia";
     openFirewall = true;
     #  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.readarr;
-=======
- 
-
   };
 
   services.sonarr = {
@@ -35,19 +32,16 @@
     dataDir = "/mnt/SSD/arr/config/sonarr/";
     user = "sonarr";
     group = "multimedia";
-
     #  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.sonarr;
   };
 
     services.lidarr = {
-
     enable = true;
     dataDir = "/mnt/SSD/arr/config/lidarr/";
     user = "lidarr";
     group = "multimedia";
     openFirewall = true;
-
-    #  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.sonarr;
+    #  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.lidarr;
 
   };
 
@@ -90,8 +84,7 @@
 
     users.users.lidarr = {
     isSystemUser = true;
-  #  home = "/mnt/SSD/arr/config/lidarr/";
-
+    #home = "/mnt/SSD/arr/config/lidarr/";
     createHome = true;
   };
 
