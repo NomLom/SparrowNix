@@ -92,7 +92,7 @@
       };
     };
 
-    # Standalone home-manager configuration entrypoint
+    # Standalone home-manager configuration entrypoint1
     # Available through 'home-manager switch --flake .#leon@slide-desktop'
     # nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz home-manager
     # nix-channel --update
