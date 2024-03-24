@@ -24,6 +24,11 @@ in {
     ];
   };
 
+
+  imports = [
+  ./language.nix
+  ];
+
   # Assuming this is part of your system's configuration
   systemd.timers.fstrim.enable = true;
 
