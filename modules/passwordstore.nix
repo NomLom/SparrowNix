@@ -16,7 +16,7 @@
   # };
   environment.systemPackages = with pkgs; [
     pass
-    gnupg
-    pinentry-gnome
+   # gnupg
+   # pinentry-gnome
   ];
 }

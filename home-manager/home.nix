@@ -1,6 +1,6 @@
 {
   inputs,
-  outputs,
+
   lib,
   config,
   pkgs,
@@ -15,7 +15,7 @@
   };
 in {
   imports = [
-    ../modules/satpaper.nix
+
   ];
   nixpkgs = {
     config = {
@@ -35,15 +35,11 @@ in {
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
-    # here is some command line tools I use frequently
-    # feel free to add your own or remove some of them
-    #   (inputs.nix-gaming.packages.${pkgs.system}.star-citizen.override (prev: {
-    #  wineDllOverrides = (prev.wineDllOverrides or "") ++ " dxgi=n";
-    # }))
-    inputs.nix-citizen.packages.${system}.star-citizen
+
     neofetch
     nnn # terminal file manager
     neovim
+    asciiquarium-transparent
 
     # archives
     zip
@@ -78,6 +74,7 @@ in {
     gawk
     zstd
     gnupg
+    emacs
 
     # nix related
     #
@@ -107,6 +104,7 @@ in {
     unstable.discord
     unstable.warp-terminal
     brave
+    celeste64
   ];
 
   # basic configuration of git, please change to your own
@@ -115,8 +113,6 @@ in {
     userName = "NomLom";
     userEmail = "leon.sparrow@gmail.com";
   };
-
-
 
   # alacritty - a cross-platform, GPU-accelerated terminal emulator
   # programs.alacritty = {
@@ -152,14 +148,12 @@ in {
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
-  # This value determines the home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update home Manager without changing this value. See
-  # the home Manager release notes for a list of state version
-  # changes in each release.
+  nix.gc = {
+    automatic = true;
+    frequency = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
   home.stateVersion = "23.11";
 
   # Let home Manager install and manage itself.

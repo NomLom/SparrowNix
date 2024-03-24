@@ -14,9 +14,9 @@
       };
     };
     libvirtd.enable = true;
-    virtualbox.host.enable = true;
-  };
 
+  };
+  programs.virt-manager.enable = true;
   environment.systemPackages = with pkgs; [
     docker-compose
   ];

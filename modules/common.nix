@@ -9,14 +9,11 @@ in {
   users.users.leon = {
     isNormalUser = true;
     description = "leon";
-    extraGroups = ["networkmanager" "wheel" "multimedia"];
+    extraGroups = ["networkmanager" "wheel" "multimedia" "kvm" "libvirtd"];
     packages = with pkgs; [
-      firefox
       kate
-      chromium
       github-desktop
       fish
-      steam
       gparted
       mplayer
       kmplayer
@@ -24,17 +21,23 @@ in {
     ];
   };
 
+
+  imports = [
+  ./language.nix
+  ];
+
   # Assuming this is part of your system's configuration
   systemd.timers.fstrim.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim
     acl
-    kio-admin
+    # kio-admin
     wget
     git
     curl
     gvfs
+    autojump
     xfce.thunar
     kde-gtk-config
     gst_all_1.gst-plugins-base
@@ -42,17 +45,57 @@ in {
     gst_all_1.gst-plugins-ugly
     gst_all_1.gst-plugins-bad
     gst_all_1.gst-libav
+    #libnvcuvid1
+    #libnvidia-encode1
     ffmpeg
     openssh
     age
-    pinentry
+    ncdu
+
     inputs.agenix.packages.${system}.default
     trufflehog
     helvum
     easyeffects
+    curseradio
+    cava
+    flameshot
+    flatpak
+    feh
+    powershell
+    kitty
+    gparted
+    mangohud
+    protonup-ng
+    python3Full
+    #python.pkgs.pip
+    qemu
+    ripgrep
+    #rofi
+    steam
+    steam-run
+
+
+
+    vkd3d
+    dxvk_2
+
+    # Hardware info
+       clinfo
+       fwupd
+      glxinfo
+    ##   gsmartcontrol
+       hwinfo
+       usbutils
+       pciutils
+    #  smartmontools
+      vulkan-tools
+
+
+    # File Tools
+    #  doublecmd
+    #veracrypt
     # wine64
     #  vulkan-tools
-
     #  vulkan-validation-layers
     #  dxvk_2
     #  lutris
@@ -60,6 +103,7 @@ in {
     # Additional packages previously defined are merged here
   ];
 
+  services.flatpak.enable = true;
   # Enable the systemd timer for periodic TRIM on SSDs.
   services.fstrim.enable = true;
 
@@ -102,13 +146,13 @@ in {
     alsa.support32Bit = true;
     pulse.enable = true;
     #jack.enable = true; # If you want to use JACK applications, uncomment this
-   # lowLatency = {
-      # enable this module
-   #   enable = true;
-      # defaults (no need to be set unless modified)
-  #   quantum = 64;
-   #   rate = 48000;
-  #  };
+    # lowLatency = {
+    # enable this module
+    #   enable = true;
+    # defaults (no need to be set unless modified)
+    #   quantum = 64;
+    #   rate = 48000;
+    #  };
   };
 
   boot.kernel.sysctl = {
@@ -117,8 +161,8 @@ in {
   };
 
   nix.gc = {
-    automatic = true; # Enable automatic garbage collection
-    dates = "weekly"; # Set the garbage collection frequency to weekly
-    options = "--delete-older-than 14d"; # Remove generations older than 30 days
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
   };
 }

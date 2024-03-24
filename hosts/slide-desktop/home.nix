@@ -1,11 +1,21 @@
+# home.nix
+{ inputs, outputs, pkgs, lib, ... }:
+
 {
-  config,
-  pkgs,
-  ...
-}: {
   imports = [
-    ../../modules/satpaper.nix
+  ../../home-manager/home.nix
+  ../../modules/satpaper.nix
   ];
 
-  # Rest of your Home Manager configurations...
+  # Machine-specific home-manager packages
+  home.packages = with pkgs; [
+   # steam
+    lutris
+    inputs.nix-citizen.packages.${system}.star-citizen
+
+    #books
+    calibre
+    foliate
+    bookworm
+  ];
 }

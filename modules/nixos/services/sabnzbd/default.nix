@@ -18,7 +18,7 @@
   # Configure the user for SABnzbd (if not already existing)
   users.users.sabnzbd = {
     isSystemUser = true;
-    group = "sabnzbd";
+    # group = "sabnzbd";
     home = lib.mkForce "/mnt/SSD/arr/config/sabnzbd/"; # Force the use of this home directory
     createHome = true;
   };
