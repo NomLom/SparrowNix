@@ -1,15 +1,21 @@
-# slide-desktop-home.nix
-{ pkgs, lib, inputs, ... }:
-let
-  commonConfig = import ../../home-manager/home.nix { inherit pkgs; };
-  isGamingMachine = true; # Manually set flag for conditional logic
-in
+# home.nix
+{ inputs, outputs, pkgs, lib, ... }:
+
 {
-  imports = [ commonConfig ];
+  imports = [
+  ../../home-manager/home.nix
+  ../../modules/satpaper.nix
+  ];
 
   # Machine-specific home-manager packages
-  home.packages = with pkgs; lib.optionals isGamingMachine [
+  home.packages = with pkgs; [
    # steam
     lutris
+    inputs.nix-citizen.packages.${system}.star-citizen
+
+    #books
+    calibre
+    foliate
+    bookworm
   ];
 }
