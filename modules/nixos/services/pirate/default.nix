@@ -13,6 +13,7 @@
     dataDir = "/mnt/SSD/arr/config/radarr/";
     user = "radarr";
     group = "multimedia";
+
     #  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.radarr;
   };
 
@@ -24,6 +25,9 @@
     group = "multimedia";
     openFirewall = true;
     #  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.readarr;
+=======
+ 
+
   };
 
   services.sonarr = {
@@ -31,16 +35,20 @@
     dataDir = "/mnt/SSD/arr/config/sonarr/";
     user = "sonarr";
     group = "multimedia";
+
     #  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.sonarr;
   };
 
-  services.lidarr = {
+    services.lidarr = {
+
     enable = true;
     dataDir = "/mnt/SSD/arr/config/lidarr/";
     user = "lidarr";
     group = "multimedia";
     openFirewall = true;
+
     #  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.sonarr;
+
   };
 
   services.jellyfin = {
@@ -56,7 +64,9 @@
     pkgs.jellyfin-ffmpeg
   ];
 
+
   networking.firewall.allowedTCPPorts = [8920 7878 8989 8096 8686];
+
   # Configure config directorys
   users.users.radarr = {
     isSystemUser = true;
@@ -70,15 +80,18 @@
     createHome = true;
   };
 
+
     users.users.readarr = {
     isSystemUser = true;
     home = "/mnt/SSD/arr/config/readarr/";
     createHome = true;
   };
 
-  users.users.lidarr = {
+
+    users.users.lidarr = {
     isSystemUser = true;
-    #  home = "/mnt/SSD/arr/config/lidarr/";
+  #  home = "/mnt/SSD/arr/config/lidarr/";
+
     createHome = true;
   };
 
